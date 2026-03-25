@@ -15,8 +15,7 @@ FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS runtime
 WORKDIR /app
 COPY --from=build /app/publish .
 
-# Listen on port 80 and use environment config
-ENV ASPNETCORE_URLS=http://+:80
-EXPOSE 80
+# Let the platform provide ASPNETCORE_URLS at runtime (do not hardcode a port)
+# The App Platform injects PORT; set ASPNETCORE_URLS=http://0.0.0.0:$PORT in the component envs
 
 ENTRYPOINT ["dotnet", "EdgeRunners.Api.dll"]

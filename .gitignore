@@ -2,6 +2,8 @@
 /out-tsc
 
 /node_modules
+/api/**/bin
+/api/**/obj
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*

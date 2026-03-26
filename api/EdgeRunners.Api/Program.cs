@@ -35,6 +35,16 @@ builder.Services.AddCors(options =>
                 .AllowAnyHeader()
                 .AllowAnyMethod();
         }
+        else
+        {
+            // Allow the Netlify frontend and any configured production origins from appsettings
+            policy
+                .WithOrigins(
+                    "https://southeastedgerunners.netlify.app"
+                )
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+        }
     });
 });
 

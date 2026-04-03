@@ -41,8 +41,7 @@ function CallRequestModal({ isOpen, onClose }: Props) {
     e.preventDefault();
     setStatus('submitting');
     try {
-      const url = import.meta.env.VITE_N8N_WEBHOOK_URL;
-      if (!url) throw new Error('Webhook URL not configured');
+      const url = 'https://edgerunners.app.n8n.cloud/webhook/c122de67-3877-4558-b44d-4a592217bfd6';
 
       const res = await fetch(url, {
         method: 'POST',

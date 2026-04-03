@@ -41,7 +41,7 @@ function CallRequestModal({ isOpen, onClose }: Props) {
     e.preventDefault();
     setStatus('submitting');
     try {
-      const url = '/api/intake';
+      const url = '/.netlify/functions/intake';
 
       const res = await fetch(url, {
         method: 'POST',

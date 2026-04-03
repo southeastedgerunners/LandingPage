@@ -2,12 +2,8 @@
   command = "npm run build"
   publish = "dist"
 
-# Proxy n8n webhook server-side — avoids browser CORS entirely
-[[redirects]]
-  from = "/api/intake"
-  to = "https://edgerunners.app.n8n.cloud/webhook/c122de67-3877-4558-b44d-4a592217bfd6"
-  status = 200
-  force = true
+[functions]
+  directory = "netlify/functions"
 
 # SPA fallback — all non-asset routes serve index.html
 [[redirects]]

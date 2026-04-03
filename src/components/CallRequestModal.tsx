@@ -3,23 +3,10 @@ import './CallRequestModal.css';
 
 interface FormData {
   contactName: string;
-  businessName: string;
   phone: string;
-  email: string;
-  website: string;
-  industry: string;
-  message: string;
 }
 
-const EMPTY: FormData = {
-  contactName: '',
-  businessName: '',
-  phone: '',
-  email: '',
-  website: '',
-  industry: '',
-  message: '',
-};
+const EMPTY: FormData = { contactName: '', phone: '' };
 
 interface Props {
   isOpen: boolean;
@@ -33,7 +20,7 @@ function CallRequestModal({ isOpen, onClose }: Props) {
 
   if (!isOpen) return null;
 
-  function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
   }
 
@@ -47,12 +34,13 @@ function CallRequestModal({ isOpen, onClose }: Props) {
       const res = await fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...form, source: 'Website Form' }),
+        body: JSON.stringify({ ...form, source: 'Website Call Request' }),
       });
 
       if (!res.ok) throw new Error(`${res.status}`);
       setStatus('success');
       setForm(EMPTY);
+      setSmsConsent(false);
     } catch {
       setStatus('error');
     }
@@ -77,7 +65,7 @@ function CallRequestModal({ isOpen, onClose }: Props) {
       aria-modal="true"
       aria-labelledby="crm-title"
     >
-      <div className="crm-modal">
+      <div className="crm-modal crm-modal--slim">
         <button className="crm-modal__close" onClick={handleClose} aria-label="Close dialog">
           ✕
         </button>
@@ -85,93 +73,34 @@ function CallRequestModal({ isOpen, onClose }: Props) {
         {status === 'success' ? (
           <div className="crm-success">
             <div className="crm-success__icon" aria-hidden="true">✓</div>
-            <h2>Request sent!</h2>
-            <p>We'll give you a call shortly to talk through your automation goals.</p>
+            <h2>We'll call you soon!</h2>
+            <p>Expect a call from the EdgeRunners team shortly.</p>
             <button className="cta-button" onClick={handleClose}>Done</button>
           </div>
         ) : (
           <>
             <div className="crm-modal__header">
               <h2 id="crm-title">Request a Call</h2>
-              <p>Tell us about your business and we'll reach out to discuss how we can help.</p>
+              <p>Drop your name and number — we'll reach out shortly.</p>
             </div>
 
             <form className="crm-form" onSubmit={handleSubmit} noValidate>
-              <div className="crm-form__row crm-form__row--half">
-                <div className="crm-field">
-                  <label htmlFor="crm-contactName">Your Name</label>
-                  <input
-                    id="crm-contactName" name="contactName" type="text"
-                    value={form.contactName} onChange={handleChange}
-                    required autoComplete="name" placeholder="John Smith"
-                    disabled={status === 'submitting'}
-                  />
-                </div>
-                <div className="crm-field">
-                  <label htmlFor="crm-businessName">Business Name</label>
-                  <input
-                    id="crm-businessName" name="businessName" type="text"
-                    value={form.businessName} onChange={handleChange}
-                    required autoComplete="organization" placeholder="Acme Roofing"
-                    disabled={status === 'submitting'}
-                  />
-                </div>
-              </div>
-
-              <div className="crm-form__row crm-form__row--half">
-                <div className="crm-field">
-                  <label htmlFor="crm-phone">Phone Number</label>
-                  <input
-                    id="crm-phone" name="phone" type="tel"
-                    value={form.phone} onChange={handleChange}
-                    required autoComplete="tel" placeholder="(606) 555-1234"
-                    disabled={status === 'submitting'}
-                  />
-                </div>
-                <div className="crm-field">
-                  <label htmlFor="crm-email">Email Address</label>
-                  <input
-                    id="crm-email" name="email" type="email"
-                    value={form.email} onChange={handleChange}
-                    required autoComplete="email" placeholder="john@acmeroofing.com"
-                    disabled={status === 'submitting'}
-                  />
-                </div>
-              </div>
-
-              <div className="crm-form__row crm-form__row--half">
-                <div className="crm-field">
-                  <label htmlFor="crm-website">
-                    Website <span className="crm-field__optional">(optional)</span>
-                  </label>
-                  <input
-                    id="crm-website" name="website" type="text"
-                    value={form.website} onChange={handleChange}
-                    autoComplete="url" placeholder="acmeroofing.com"
-                    disabled={status === 'submitting'}
-                  />
-                </div>
-                <div className="crm-field">
-                  <label htmlFor="crm-industry">
-                    Industry <span className="crm-field__optional">(optional)</span>
-                  </label>
-                  <input
-                    id="crm-industry" name="industry" type="text"
-                    value={form.industry} onChange={handleChange}
-                    placeholder="Roofing"
-                    disabled={status === 'submitting'}
-                  />
-                </div>
+              <div className="crm-field">
+                <label htmlFor="crm-contactName">Your Name</label>
+                <input
+                  id="crm-contactName" name="contactName" type="text"
+                  value={form.contactName} onChange={handleChange}
+                  required autoComplete="name" placeholder="John Smith"
+                  disabled={status === 'submitting'}
+                />
               </div>
 
               <div className="crm-field">
-                <label htmlFor="crm-message">How can we help?</label>
-                <textarea
-                  id="crm-message" name="message"
-                  value={form.message} onChange={handleChange}
-                  rows={3}
-                  required
-                  placeholder="We need help with missed-call text back and appointment reminders…"
+                <label htmlFor="crm-phone">Phone Number</label>
+                <input
+                  id="crm-phone" name="phone" type="tel"
+                  value={form.phone} onChange={handleChange}
+                  required autoComplete="tel" placeholder="(606) 555-1234"
                   disabled={status === 'submitting'}
                 />
               </div>

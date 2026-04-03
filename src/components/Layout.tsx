@@ -1,4 +1,5 @@
 import { NavLink, Outlet } from 'react-router-dom';
+import TawkWidget from './TawkWidget';
 import './Layout.css';
 
 function Layout() {
@@ -37,6 +38,8 @@ function Layout() {
       <footer className="footer">
         <small>© {new Date().getFullYear()} SouthEast EdgeRunners. All rights reserved.</small>
       </footer>
+
+      <TawkWidget />
     </div>
   );
 }

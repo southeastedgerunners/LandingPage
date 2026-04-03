@@ -7,3 +7,11 @@ interface ImportMetaEnv {
 interface ImportMeta {
   readonly env: ImportMetaEnv;
 }
+
+interface Window {
+  Tawk_API?: {
+    hideWidget: () => void;
+    showWidget: () => void;
+    onLoad?: () => void;
+  };
+}

@@ -153,6 +153,10 @@
   min-height: 80px;
 }
 
+.crm-modal--slim {
+  max-width: 400px;
+}
+
 /* ── SMS Consent ── */
 .crm-consent {
   display: flex;

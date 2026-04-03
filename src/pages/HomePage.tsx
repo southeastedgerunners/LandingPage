@@ -31,6 +31,21 @@ const services = [
     description:
       'Automatically follow up with every lead via text, keeping customers engaged and reducing churn without lifting a finger.',
   },
+  {
+    title: 'Branding & Visual Identity',
+    description:
+      'Logos, color palettes, and brand guidelines crafted by real creatives — built to make your business look as professional as it runs.',
+  },
+  {
+    title: 'QuickBooks Automation',
+    description:
+      'We automate your invoicing, payment reminders, and expense syncing so your books stay clean without you touching them.',
+  },
+  {
+    title: 'Reputation & Review Management',
+    description:
+      'Automatically request Google and Facebook reviews after every job, monitor your mentions, and build the social proof that wins new customers.',
+  },
 ];
 
 const stats = [
@@ -122,13 +137,15 @@ function HomePage() {
               <button type="button" className="cta-button" onClick={() => setIsModalOpen(true)}>
                 Request a Call
               </button>
-            </div>
-            <p className="hero__note">
-              Prefer a form?{' '}
-              <a href={TALLY_FORM_URL} target="_blank" rel="noopener noreferrer" className="hero__tally-link">
-                Fill out our quick intake form →
+              <a
+                href={TALLY_FORM_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="cta-button cta-button--pink"
+              >
+                Free Intake Form →
               </a>
-            </p>
+            </div>
           </div>
           <div className="hero__visual">
             <img src={logo} alt="SouthEast EdgeRunners" className="hero__logo" />

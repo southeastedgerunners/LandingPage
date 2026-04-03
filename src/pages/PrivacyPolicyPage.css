@@ -7,8 +7,8 @@
 .page-section {
   padding: 2.5rem;
   border-radius: 24px;
-  background: linear-gradient(155deg, rgba(255, 255, 255, 0.04), rgba(0, 0, 0, 0.28));
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  background: linear-gradient(155deg, rgba(255, 45, 138, 0.06), rgba(0, 0, 0, 0.28));
+  border: 1px solid rgba(255, 45, 138, 0.18);
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -19,12 +19,14 @@
   margin: 0;
   font-size: clamp(2rem, 4.2vw, 2.75rem);
   font-weight: 700;
+  color: var(--color-accent-alt);
 }
 
 .privacy__updated {
   margin: 0;
-  color: var(--color-muted);
+  color: var(--color-accent-alt);
   font-size: 0.9rem;
+  opacity: 0.75;
 }
 
 .privacy__body {
@@ -36,15 +38,16 @@
 .privacy__section {
   padding: 1.75rem 2rem;
   border-radius: 20px;
-  background: linear-gradient(160deg, rgba(255, 255, 255, 0.03), rgba(0, 0, 0, 0.22));
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: linear-gradient(160deg, rgba(255, 45, 138, 0.04), rgba(0, 0, 0, 0.22));
+  border: 1px solid rgba(255, 45, 138, 0.1);
+  border-left: 3px solid var(--color-accent-alt);
 }
 
 .privacy__section h2 {
   margin: 0 0 0.75rem;
   font-size: 1.2rem;
   font-weight: 600;
-  color: var(--color-accent);
+  color: var(--color-accent-alt);
 }
 
 .privacy__section p,
@@ -63,7 +66,7 @@
 }
 
 .privacy__link {
-  color: var(--color-accent);
+  color: var(--color-accent-alt);
   text-decoration: underline;
   text-underline-offset: 3px;
 }

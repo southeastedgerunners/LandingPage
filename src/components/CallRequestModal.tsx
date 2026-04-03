@@ -34,7 +34,7 @@ function CallRequestModal({ isOpen, onClose }: Props) {
       const res = await fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...form, source: 'Website Call Request' }),
+        body: JSON.stringify({ ...form, formType: 'quick', source: 'Website Call Request' }),
       });
 
       if (!res.ok) throw new Error(`${res.status}`);

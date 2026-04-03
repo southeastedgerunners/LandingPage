@@ -1,9 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import logo from '../assets/SouthEasternEdgeRunners.png';
 import CallRequestModal from '../components/CallRequestModal';
+import IntakeFormModal from '../components/IntakeFormModal';
 import './HomePage.css';
-
-const TALLY_FORM_URL = 'https://tally.so/r/REPLACE_WITH_YOUR_FORM_ID';
 
 const services = [
   {
@@ -119,6 +118,7 @@ function StatCard({ value, suffix, label }: { value: number; suffix: string; lab
 
 function HomePage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isIntakeOpen, setIsIntakeOpen] = useState(false);
 
   return (
     <>
@@ -137,14 +137,9 @@ function HomePage() {
               <button type="button" className="cta-button" onClick={() => setIsModalOpen(true)}>
                 Request a Call
               </button>
-              <a
-                href={TALLY_FORM_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="cta-button cta-button--pink"
-              >
+              <button type="button" className="cta-button cta-button--pink" onClick={() => setIsIntakeOpen(true)}>
                 Free Intake Form →
-              </a>
+              </button>
             </div>
           </div>
           <div className="hero__visual">
@@ -191,6 +186,7 @@ function HomePage() {
       </div>
 
       <CallRequestModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      <IntakeFormModal isOpen={isIntakeOpen} onClose={() => setIsIntakeOpen(false)} />
     </>
   );
 }

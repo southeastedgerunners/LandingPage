@@ -41,7 +41,7 @@ function CallRequestModal({ isOpen, onClose }: Props) {
     e.preventDefault();
     setStatus('submitting');
     try {
-      const url = 'https://edgerunners.app.n8n.cloud/webhook/c122de67-3877-4558-b44d-4a592217bfd6';
+      const url = '/api/intake';
 
       const res = await fetch(url, {
         method: 'POST',

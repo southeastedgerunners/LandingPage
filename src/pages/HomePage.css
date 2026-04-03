@@ -45,7 +45,7 @@
   gap: 0.85rem;
 }
 
-.hero__booking-note {
+.hero__note {
   margin: 0;
   max-width: 420px;
   color: rgba(255, 255, 255, 0.72);
@@ -53,29 +53,17 @@
   line-height: 1.45;
 }
 
-.cta-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  appearance: none;
-  border: none;
-  border-radius: 12px;
-  background: linear-gradient(135deg, rgba(0, 181, 201, 0.9), rgba(0, 120, 160, 0.9));
-  color: #ffffff;
-  padding: 0.75rem 1.75rem;
-  font-size: 0.95rem;
-  font-weight: 600;
-  letter-spacing: 0.03em;
-  cursor: pointer;
-  text-decoration: none;
-  box-shadow: 0 14px 28px rgba(0, 181, 201, 0.25);
-  transition: transform 150ms ease, box-shadow 150ms ease;
+.hero__tally-link {
+  font-size: 0.9rem;
+  color: var(--color-accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 150ms ease;
 }
 
-.cta-button:hover,
-.cta-button:focus-visible {
-  transform: translateY(-2px);
-  box-shadow: 0 16px 32px rgba(0, 181, 201, 0.32);
+.hero__tally-link:hover,
+.hero__tally-link:focus-visible {
+  color: #fff;
 }
 
 .hero__visual {
@@ -190,7 +178,7 @@
   }
 
   .hero__sub,
-  .hero__booking-note,
+  .hero__note,
   .service-card p {
     font-size: 0.95rem;
     line-height: 1.45;
@@ -225,7 +213,143 @@
     padding: 1rem;
   }
 
-  /* Make hero and services fit without extra scrolling on small phones */
-  .hero__booking-note { max-width: 100%; }
+  .hero__note { max-width: 100%; }
   .hero__content { max-width: 100%; }
+}
+
+/* ── Stats ── */
+.stats {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.stats h2,
+.how-it-works h2 {
+  margin: 0 0 0.25rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.stats__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1rem;
+}
+
+.stat-card {
+  background: linear-gradient(160deg, rgba(0, 181, 201, 0.07), rgba(0, 0, 0, 0.2));
+  border: 1px solid rgba(0, 181, 201, 0.15);
+  border-radius: 20px;
+  padding: 1.5rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  transition: transform 180ms ease, border-color 180ms ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(0, 181, 201, 0.3);
+}
+
+.stat-card__value {
+  font-size: clamp(2rem, 5vw, 2.8rem);
+  font-weight: 700;
+  line-height: 1;
+  color: var(--color-accent);
+  letter-spacing: -0.02em;
+}
+
+.stat-card__label {
+  font-size: 0.9rem;
+  color: var(--color-muted);
+  line-height: 1.35;
+}
+
+/* ── How It Works ── */
+.how-it-works {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.how-it-works__steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  position: relative;
+}
+
+.how-it-works__steps::before {
+  content: '';
+  position: absolute;
+  top: 2rem;
+  left: calc(16.66% + 0.5rem);
+  right: calc(16.66% + 0.5rem);
+  height: 2px;
+  background: linear-gradient(90deg, rgba(0, 181, 201, 0.4), rgba(255, 45, 138, 0.4));
+  z-index: 0;
+}
+
+.step-card {
+  position: relative;
+  z-index: 1;
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.04), rgba(0, 0, 0, 0.2));
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 20px;
+  padding: 1.5rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  transition: transform 180ms ease, border-color 180ms ease;
+}
+
+.step-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(0, 181, 201, 0.25);
+}
+
+.step-card__badge {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--color-accent), rgba(0, 120, 160, 0.9));
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 4px 14px rgba(0, 181, 201, 0.35);
+}
+
+.step-card__title {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.step-card__desc {
+  margin: 0;
+  font-size: 0.92rem;
+  color: var(--color-muted);
+  line-height: 1.55;
+}
+
+@media (max-width: 720px) {
+  .how-it-works__steps {
+    grid-template-columns: 1fr;
+  }
+
+  .how-it-works__steps::before {
+    display: none;
+  }
+}
+
+@media (max-width: 560px) {
+  .stats__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }

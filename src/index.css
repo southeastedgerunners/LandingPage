@@ -35,3 +35,36 @@ a {
 button {
   font-family: inherit;
 }
+
+/* ── Shared button ── */
+.cta-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  appearance: none;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(0, 181, 201, 0.9), rgba(0, 120, 160, 0.9));
+  color: #ffffff;
+  padding: 0.75rem 1.75rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: 0 14px 28px rgba(0, 181, 201, 0.25);
+  transition: transform 150ms ease, box-shadow 150ms ease;
+}
+
+.cta-button:hover,
+.cta-button:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 32px rgba(0, 181, 201, 0.32);
+}
+
+.cta-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}

@@ -8,6 +8,13 @@ interface FormData {
 
 const EMPTY: FormData = { contactName: '', phone: '' };
 
+function formatPhone(raw: string): string {
+  const digits = raw.replace(/\D/g, '').slice(0, 10);
+  if (digits.length < 4) return digits;
+  if (digits.length < 7) return `(${digits.slice(0, 3)}) ${digits.slice(3)}`;
+  return `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6)}`;
+}
+
 interface Props {
   isOpen: boolean;
   onClose: () => void;
@@ -20,8 +27,14 @@ function CallRequestModal({ isOpen, onClose }: Props) {
 
   if (!isOpen) return null;
 
+  const isReady =
+    form.contactName.trim().length > 0 &&
+    form.phone.replace(/\D/g, '').length === 10 &&
+    smsConsent;
+
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
-    setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
+    const { name, value } = e.target;
+    setForm(prev => ({ ...prev, [name]: name === 'phone' ? formatPhone(value) : value }));
   }
 
   async function handleSubmit(e: React.FormEvent) {
@@ -131,7 +144,7 @@ function CallRequestModal({ isOpen, onClose }: Props) {
               <button
                 type="submit"
                 className="cta-button crm-form__submit"
-                disabled={status === 'submitting'}
+                disabled={!isReady || status === 'submitting'}
               >
                 {status === 'submitting' ? 'Sending…' : 'Request a Call →'}
               </button>

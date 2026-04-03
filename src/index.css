@@ -63,10 +63,12 @@ button {
 }
 
 .cta-button:disabled {
-  opacity: 0.6;
+  opacity: 1;
   cursor: not-allowed;
   transform: none;
   box-shadow: none;
+  background: rgba(100, 100, 100, 0.4);
+  color: rgba(255, 255, 255, 0.35);
 }
 
 .cta-button--pink {

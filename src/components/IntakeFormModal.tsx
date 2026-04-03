@@ -21,6 +21,13 @@ const EMPTY: FormData = {
   message: '',
 };
 
+function formatPhone(raw: string): string {
+  const digits = raw.replace(/\D/g, '').slice(0, 10);
+  if (digits.length < 4) return digits;
+  if (digits.length < 7) return `(${digits.slice(0, 3)}) ${digits.slice(3)}`;
+  return `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6)}`;
+}
+
 interface Props {
   isOpen: boolean;
   onClose: () => void;
@@ -33,8 +40,17 @@ function IntakeFormModal({ isOpen, onClose }: Props) {
 
   if (!isOpen) return null;
 
+  const isReady =
+    form.contactName.trim().length > 0 &&
+    form.businessName.trim().length > 0 &&
+    form.phone.replace(/\D/g, '').length === 10 &&
+    form.email.trim().length > 0 &&
+    form.message.trim().length > 0 &&
+    smsConsent;
+
   function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
-    setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
+    const { name, value } = e.target;
+    setForm(prev => ({ ...prev, [name]: name === 'phone' ? formatPhone(value) : value }));
   }
 
   async function handleSubmit(e: React.FormEvent) {
@@ -203,7 +219,7 @@ function IntakeFormModal({ isOpen, onClose }: Props) {
               <button
                 type="submit"
                 className="cta-button cta-button--pink crm-form__submit"
-                disabled={status === 'submitting'}
+                disabled={!isReady || status === 'submitting'}
               >
                 {status === 'submitting' ? 'Sending…' : 'Submit Intake Form →'}
               </button>

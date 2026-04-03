@@ -1,5 +1,5 @@
 const N8N_WEBHOOK =
-  'https://edgerunners.app.n8n.cloud/webhook/c122de67-3877-4558-b44d-4a592217bfd6';
+  'https://edgerunners.app.n8n.cloud/webhook/website-lead-intake';
 
 export const handler = async (event) => {
   if (event.httpMethod !== 'POST') {

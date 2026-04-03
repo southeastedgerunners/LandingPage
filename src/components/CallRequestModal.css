@@ -273,6 +273,10 @@
     padding: 1.5rem 1rem;
   }
 
+  .crm-modal__header h2 {
+    font-size: clamp(1.1rem, 5vw, 1.4rem);
+  }
+
   .crm-form__row--half {
     flex-direction: column;
   }

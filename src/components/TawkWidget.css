@@ -43,3 +43,20 @@
 .tawk-restore:hover {
   transform: scale(1.1);
 }
+
+@media (max-width: 560px) {
+  .tawk-dismiss {
+    font-size: 0.7rem;
+    padding: 0.25rem 0.6rem;
+    bottom: 5rem;
+    right: 0.75rem;
+  }
+
+  .tawk-restore {
+    width: 2.75rem;
+    height: 2.75rem;
+    font-size: 1.1rem;
+    bottom: 0.75rem;
+    right: 0.75rem;
+  }
+}

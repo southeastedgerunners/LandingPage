@@ -16,6 +16,7 @@ interface ResultsState {
     notes?: string;
   };
   jobType: string;
+  store: string;
 }
 
 const fmt = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' });
@@ -37,14 +38,14 @@ export default function EstimatorResultsPage() {
     );
   }
 
-  const { results, jobType } = state;
+  const { results, jobType, store } = state;
   const items: ResultItem[] = results.items ?? [];
 
   return (
     <div className="results">
       <div className="results__header">
         <h1>Your Materials List</h1>
-        <p>Estimated materials for: {jobType}</p>
+        <p>Estimated materials for: <strong>{jobType}</strong> · Prices sourced from <strong>{store}</strong></p>
       </div>
 
       {items.length === 0 ? (

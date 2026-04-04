@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import './EstimatorPage.css';
 
 type JobType = '' | 'Flooring' | 'Build a Deck' | 'Paint a Room';
+type Store = 'Home Depot' | 'Lowe\'s' | 'Menards' | 'Ace Hardware' | 'Amazon';
 
 interface FlooringFields {
   squareFootage: number;
@@ -300,6 +301,7 @@ const fmt = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' 
 export default function EstimatorPage() {
   const navigate = useNavigate();
   const [jobType, setJobType] = useState<JobType>('');
+  const [store, setStore] = useState<Store>('Home Depot');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -310,14 +312,14 @@ export default function EstimatorPage() {
       const res = await fetch('/.netlify/functions/estimator', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...formData, jobType }),
+        body: JSON.stringify({ ...formData, jobType, store }),
       });
       if (!res.ok) {
         throw new Error(`Server error: ${res.status}`);
       }
       const data = await res.json();
       if (data.error) throw new Error(data.error);
-      navigate('/estimator/results', { state: { results: data, jobType } });
+      navigate('/estimator/results', { state: { results: data, jobType, store } });
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Something went wrong. Please try again.');
     } finally {
@@ -346,6 +348,19 @@ export default function EstimatorPage() {
           <option value="Flooring">Flooring</option>
           <option value="Build a Deck">Build a Deck</option>
           <option value="Paint a Room">Paint a Room</option>
+        </select>
+
+        <label htmlFor="store-select" style={{ marginTop: '1.25rem' }}>Preferred store</label>
+        <select
+          id="store-select"
+          value={store}
+          onChange={e => setStore(e.target.value as Store)}
+        >
+          <option>Home Depot</option>
+          <option>Lowe's</option>
+          <option>Menards</option>
+          <option>Ace Hardware</option>
+          <option>Amazon</option>
         </select>
       </div>
 

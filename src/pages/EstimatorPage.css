@@ -1,0 +1,269 @@
+/* ── Page layout ── */
+.estimator {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* ── Header ── */
+.estimator__header {
+  padding: 2.5rem;
+  border-radius: 24px;
+  background: linear-gradient(155deg, rgba(255, 45, 138, 0.06), rgba(0, 0, 0, 0.28));
+  border: 1px solid rgba(255, 45, 138, 0.18);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.32);
+}
+
+.estimator__header h1 {
+  margin: 0;
+  font-size: clamp(2rem, 4.2vw, 2.75rem);
+  font-weight: 700;
+  color: var(--color-accent-alt);
+}
+
+.estimator__header p {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* ── Selector card ── */
+.estimator__selector {
+  background: var(--color-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: var(--shadow-soft);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.estimator__selector label {
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--color-muted);
+  letter-spacing: 0.02em;
+}
+
+.estimator__selector select {
+  appearance: none;
+  -webkit-appearance: none;
+  background: rgba(255, 255, 255, 0.05) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23b6b6b6' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right 1rem center;
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  color: var(--color-text);
+  font-family: inherit;
+  font-size: 0.95rem;
+  padding: 0.65rem 2.5rem 0.65rem 0.85rem;
+  width: 100%;
+  cursor: pointer;
+  transition: border-color 150ms ease, box-shadow 150ms ease;
+  outline: none;
+}
+
+.estimator__selector select:focus-visible {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(0, 181, 201, 0.15);
+}
+
+.estimator__selector select option {
+  background: var(--color-elevated);
+  color: var(--color-text);
+}
+
+/* ── Form card ── */
+.estimator__form-card {
+  background: var(--color-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: var(--shadow-soft);
+  animation: est-slide-in 180ms ease;
+}
+
+@keyframes est-slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Form internals ── */
+.est-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.est-row {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.est-row > * {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.est-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.est-field label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--color-muted);
+  letter-spacing: 0.02em;
+}
+
+.est-field__hint {
+  font-size: 0.78rem;
+  color: rgba(182, 182, 182, 0.6);
+  line-height: 1.4;
+  margin-top: 0.15rem;
+}
+
+.est-field input,
+.est-field select {
+  appearance: none;
+  -webkit-appearance: none;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  color: var(--color-text);
+  font-family: inherit;
+  font-size: 0.95rem;
+  padding: 0.65rem 0.85rem;
+  width: 100%;
+  transition: border-color 150ms ease, box-shadow 150ms ease;
+  outline: none;
+}
+
+.est-field select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23b6b6b6' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.85rem center;
+  padding-right: 2.5rem;
+  cursor: pointer;
+}
+
+.est-field select option {
+  background: var(--color-elevated);
+  color: var(--color-text);
+}
+
+.est-field input:focus,
+.est-field select:focus-visible {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(0, 181, 201, 0.15);
+}
+
+/* ── Checkbox ── */
+.est-checkbox {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.6rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: var(--color-muted);
+  user-select: none;
+}
+
+.est-checkbox input[type='checkbox'] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 1.1rem;
+  height: 1.1rem;
+  min-width: 1.1rem;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.05);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 150ms ease, border-color 150ms ease;
+  flex-shrink: 0;
+}
+
+.est-checkbox input[type='checkbox']:checked {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.est-checkbox input[type='checkbox']:checked::after {
+  content: '✓';
+  color: #fff;
+  font-size: 0.7rem;
+  line-height: 1;
+  display: block;
+  text-align: center;
+}
+
+.est-checkbox input[type='checkbox']:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* ── Submit button ── */
+.est-form .cta-button {
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+/* ── Error ── */
+.est-error {
+  margin: 0;
+  font-size: 0.88rem;
+  color: #ff6b8a;
+  background: rgba(255, 45, 138, 0.1);
+  border: 1px solid rgba(255, 45, 138, 0.2);
+  border-radius: 8px;
+  padding: 0.6rem 0.85rem;
+}
+
+/* ── Responsive ── */
+@media (max-width: 720px) {
+  .estimator__header {
+    padding: 2rem 1.5rem;
+  }
+
+  .estimator__selector,
+  .estimator__form-card {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 560px) {
+  .estimator {
+    gap: 1.5rem;
+  }
+
+  .estimator__header {
+    padding: 1.5rem 1rem;
+    border-radius: 20px;
+  }
+
+  .estimator__selector,
+  .estimator__form-card {
+    padding: 1.15rem 1rem;
+    border-radius: 18px;
+  }
+
+  .est-row {
+    flex-direction: column;
+    gap: 1.1rem;
+  }
+}

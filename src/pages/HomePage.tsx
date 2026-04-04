@@ -2,74 +2,43 @@ import { useState, useEffect, useRef } from 'react';
 import logo from '../assets/SouthEasternEdgeRunners.png';
 import CallRequestModal from '../components/CallRequestModal';
 import IntakeFormModal from '../components/IntakeFormModal';
+import {
+  auditYourWorkflow,
+  buildTheAutomation,
+  youSaveTime,
+  workflowAutomation,
+  aiApplications,
+  websiteCreation,
+  facebookAdsAndLeadFunnels,
+  crmAndAutoTexting,
+  brandingAndVisualIdentity,
+  quickBooksAutomation,
+  reputationAndReviewManagement,
+} from '../content/homePage';
 import './HomePage.css';
 
 const services = [
-  {
-    title: 'Workflow Automation',
-    description:
-      'We build custom n8n workflows that connect your tools, eliminate repetitive tasks, and keep your business running around the clock.',
-  },
-  {
-    title: 'AI Applications',
-    description:
-      'From smart chatbots to intelligent document processing, we integrate AI into your operations so you can focus on growth.',
-  },
-  {
-    title: 'Website Creation',
-    description:
-      'Fast, modern websites built with purpose — designed to convert visitors and reflect your brand.',
-  },
-  {
-    title: 'Facebook Ads & Lead Funnels',
-    description:
-      'Targeted ad campaigns paired with optimized funnels that capture leads and route them directly into your CRM.',
-  },
-  {
-    title: 'CRM & Auto-Texting',
-    description:
-      'Automatically follow up with every lead via text, keeping customers engaged and reducing churn without lifting a finger.',
-  },
-  {
-    title: 'Branding & Visual Identity',
-    description:
-      'Logos, color palettes, and brand guidelines crafted by real creatives — built to make your business look as professional as it runs.',
-  },
-  {
-    title: 'QuickBooks Automation',
-    description:
-      'We automate your invoicing, payment reminders, and expense syncing so your books stay clean without you touching them.',
-  },
-  {
-    title: 'Reputation & Review Management',
-    description:
-      'Automatically request Google and Facebook reviews after every job, monitor your mentions, and build the social proof that wins new customers.',
-  },
+  { title: 'Workflow Automation',            description: workflowAutomation },
+  { title: 'AI Applications',               description: aiApplications },
+  { title: 'Website Creation',              description: websiteCreation },
+  { title: 'Facebook Ads & Lead Funnels',   description: facebookAdsAndLeadFunnels },
+  { title: 'CRM & Auto-Texting',            description: crmAndAutoTexting },
+  { title: 'Branding & Visual Identity',    description: brandingAndVisualIdentity },
+  { title: 'QuickBooks Automation',         description: quickBooksAutomation },
+  { title: 'Reputation & Review Management', description: reputationAndReviewManagement },
 ];
 
 const stats = [
-  { value: 50, suffix: '+', label: 'Workflows Automated' },
+  { value: 50,  suffix: '+', label: 'Workflows Automated' },
   { value: 200, suffix: '+', label: 'Hours Saved Monthly' },
   { value: 100, suffix: '%', label: 'Client Retention' },
-  { value: 5, suffix: 'x', label: 'Average ROI' },
+  { value: 5,   suffix: 'x', label: 'Average ROI' },
 ];
 
 const steps = [
-  {
-    title: 'Audit Your Workflow',
-    description:
-      'We map out where your team spends time on manual, repetitive work — and identify exactly where automation delivers the biggest impact.',
-  },
-  {
-    title: 'Build the Automation',
-    description:
-      'We design and deploy custom n8n workflows, AI integrations, and CRM connections tailored to your business.',
-  },
-  {
-    title: 'You Save Time',
-    description:
-      'Your systems run on autopilot. Leads get followed up, appointments get booked, and your team focuses on what matters.',
-  },
+  { title: 'Audit Your Workflow', description: auditYourWorkflow },
+  { title: 'Build the Automation', description: buildTheAutomation },
+  { title: 'You Save Time',        description: youSaveTime },
 ];
 
 function useCountUp(target: number, isActive: boolean, duration = 1200) {

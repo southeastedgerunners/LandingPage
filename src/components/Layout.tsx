@@ -29,6 +29,14 @@ function Layout() {
             Privacy Policy
           </NavLink>
           <NavLink
+            to="/terms"
+            className={({ isActive }) =>
+              ['nav-button', isActive ? 'nav-button--active' : ''].filter(Boolean).join(' ')
+            }
+          >
+            Terms
+          </NavLink>
+          <NavLink
             to="/estimator"
             className={({ isActive }) =>
               ['nav-button', isActive ? 'nav-button--active' : ''].filter(Boolean).join(' ')

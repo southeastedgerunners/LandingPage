@@ -45,6 +45,11 @@ function Layout() {
 
       <footer className="footer">
         <small>© {new Date().getFullYear()} SouthEast EdgeRunners. All rights reserved.</small>
+        <div className="footer__links">
+          <NavLink to="/terms" className="footer__link">
+            Terms and Conditions
+          </NavLink>
+        </div>
       </footer>
 
       <TawkWidget />

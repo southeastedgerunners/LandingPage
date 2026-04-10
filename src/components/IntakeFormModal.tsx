@@ -201,8 +201,9 @@ function IntakeFormModal({ isOpen, onClose }: Props) {
                   disabled={status === 'submitting'}
                 />
                 <span>
-                  I agree to receive SMS messages from SouthEast EdgeRunners. Msg &amp; data rates
-                  may apply. Reply STOP to unsubscribe.{' '}
+                  I agree to receive SMS messages from SouthEast EdgeRunners regarding my inquiry,
+                  including updates, reminders, and follow-ups. Message frequency may vary. Message
+                  and data rates may apply. Reply STOP to opt out.{' '}
                   <a href="/privacy" target="_blank" rel="noopener noreferrer" className="crm-consent__link">
                     Privacy Policy
                   </a>

@@ -24,6 +24,8 @@ npm run preview
 - `src/App.tsx` is intentionally thin and only defines the route tree. It renders a shared `Layout` route at `/`, with nested routes for:
   - `index` -> `HomePage`
   - `/privacy` -> `PrivacyPolicyPage`
+  - `/estimator` -> `EstimatorPage`
+  - `/estimator/results` -> `EstimatorResultsPage`
 - `src/components/Layout.tsx` owns the persistent shell: brand, top navigation, main content area, and footer. Nested pages render through `<Outlet />`.
 - `src/pages/HomePage.tsx` contains the homepage content: hero, stats counter, how-it-works, and services sections.
 - `src/components/CallRequestModal.tsx` owns the "Request a Call" form. On submit it POSTs directly to the n8n webhook URL (`VITE_N8N_WEBHOOK_URL`). No backend involved.

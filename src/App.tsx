@@ -4,6 +4,8 @@ import HomePage from './pages/HomePage';
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 import EstimatorPage from './pages/EstimatorPage';
 import EstimatorResultsPage from './pages/EstimatorResultsPage';
+import QuickContactPage from './pages/QuickContactPage';
+import ContactPage from './pages/ContactPage';
 
 function App() {
   return (
@@ -13,6 +15,8 @@ function App() {
         <Route path="privacy" element={<PrivacyPolicyPage />} />
         <Route path="estimator" element={<EstimatorPage />} />
         <Route path="estimator/results" element={<EstimatorResultsPage />} />
+        <Route path="quick-contact" element={<QuickContactPage />} />
+        <Route path="contact" element={<ContactPage />} />
       </Route>
     </Routes>
   );

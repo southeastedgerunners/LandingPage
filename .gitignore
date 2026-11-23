@@ -10,3 +10,18 @@ yarn-error.log*
 .env.local
 .env.*.local
 dist
+
+# Environment files and secrets (keep the example file)
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# OS files
+.DS_Store
+
+# Local tool output and runtime state
+.playwright-mcp/
+.impeccable/live/
+.impeccable/hook.cache.json

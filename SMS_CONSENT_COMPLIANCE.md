@@ -46,9 +46,9 @@ Checkbox styling in `src/components/CallRequestModal.css`:
 - Proper focus states for accessibility
 - Responsive design for mobile
 
-### Next Steps for n8n Workflow
+### Next Steps for the Lead Pipeline
 
-Ensure your n8n webhook handler:
+The lead pipeline is being rebuilt (see `netlify/functions/intake.mjs`). Ensure the new pipeline:
 1. Logs the SMS consent status from form submissions
 2. Uses this consent flag before sending any SMS messages
 3. Maintains audit trail of consent for compliance documentation

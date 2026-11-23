@@ -62,12 +62,24 @@ describe('CallRequestForm', () => {
   });
 
   it('announces an error with an email fallback and keeps the input when the request fails', async () => {
-    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ ok: false }));
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ ok: false, status: 500 }));
     render(<CallRequestForm headingId="h" onDone={() => {}} />);
     fillValidForm();
     fireEvent.click(submitButton());
     const alert = await screen.findByRole('alert');
+    expect(alert.textContent).toMatch(/couldn’t send that/);
     expect(alert.querySelector('a')?.getAttribute('href')).toBe('mailto:southeast.edgerunners@gmail.com');
     expect(screen.getByLabelText<HTMLInputElement>('Your Name').value).toBe('Dana');
+  });
+
+  it('says plainly that nothing was sent while the lead pipeline is not connected', async () => {
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ ok: false, status: 503 }));
+    render(<CallRequestForm headingId="h" onDone={() => {}} />);
+    fillValidForm();
+    fireEvent.click(submitButton());
+    const alert = await screen.findByRole('alert');
+    expect(alert.textContent).toMatch(/aren’t connected yet, so this wasn’t sent/);
+    expect(alert.querySelector('a')?.getAttribute('href')).toBe('mailto:southeast.edgerunners@gmail.com');
+    expect(screen.queryByRole('heading', { name: /call you soon/i })).toBeNull();
   });
 });

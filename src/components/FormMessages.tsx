@@ -1,4 +1,4 @@
-import { CONTACT_EMAIL } from '../lib/contact';
+import { CONTACT_EMAIL, RESPONSE_PROMISE } from '../lib/contact';
 
 /** Inline message under a field that failed validation. Linked from the field by aria-describedby. */
 export function FieldError({ id, message }: { id: string; message?: string }) {
@@ -10,12 +10,19 @@ export function FieldError({ id, message }: { id: string; message?: string }) {
   );
 }
 
-/** Shown when the request fails. Names the problem and a way around it. */
-export function SubmitError() {
+/**
+ * Shown when a request doesn't go through. Names the problem and a way around it.
+ * "unavailable" means the server told us online requests aren't connected yet.
+ */
+export function SubmitError({ unavailable = false }: { unavailable?: boolean }) {
+  const email = <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>;
   return (
     <p className="lead-form__error" role="alert">
-      We couldn’t send that. Check your connection and try again, or email us at{' '}
-      <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.
+      {unavailable ? (
+        <>Online requests aren’t connected yet, so this wasn’t sent. Please email us at {email} and we’ll reply {RESPONSE_PROMISE}.</>
+      ) : (
+        <>We couldn’t send that. Check your connection and try again, or email us at {email}.</>
+      )}
     </p>
   );
 }

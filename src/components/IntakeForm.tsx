@@ -4,7 +4,7 @@ import FormStatus from './FormStatus';
 import { FieldError, SubmitError, fieldA11y, focusFirstInvalid } from './FormMessages';
 import { RESPONSE_PROMISE } from '../lib/contact';
 import { formatPhone, isCompletePhone } from '../lib/phone';
-import { submitLead, type SubmitStatus } from '../lib/submitLead';
+import { statusFor, submitLead, type SubmitStatus } from '../lib/submitLead';
 import './forms.css';
 
 interface Props {
@@ -74,9 +74,9 @@ function IntakeForm({ headingId, headingLevel = 'h2', onDone, doneLabel = 'Done'
       return;
     }
     setStatus('submitting');
-    const ok = await submitLead({ ...form, formType: 'full', source: 'Website Intake Form' });
-    setStatus(ok ? 'success' : 'error');
-    if (ok) {
+    const result = await submitLead({ ...form, formType: 'full', source: 'Website Intake Form' });
+    setStatus(statusFor(result));
+    if (result === 'sent') {
       setForm(EMPTY);
       setSmsConsent(false);
       setAttempted(false);
@@ -199,7 +199,7 @@ function IntakeForm({ headingId, headingLevel = 'h2', onDone, doneLabel = 'Done'
           error={show('consent')}
         />
 
-        {status === 'error' && <SubmitError />}
+        {(status === 'error' || status === 'unavailable') && <SubmitError unavailable={status === 'unavailable'} />}
 
         <button type="submit" className="cta-button lead-form__submit" aria-disabled={busy || undefined}>
           {busy ? 'Sending…' : 'Send intake form'}

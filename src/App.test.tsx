@@ -1,4 +1,4 @@
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import App from './App';
@@ -11,13 +11,8 @@ function renderAt(path: string) {
   );
 }
 
-beforeEach(() => {
-  vi.stubGlobal('requestIdleCallback', vi.fn(() => 0));
-  vi.stubGlobal('cancelIdleCallback', vi.fn());
-});
-
 afterEach(() => {
-  cleanup(); // unmount while the idle-callback stubs still exist
+  cleanup();
   vi.unstubAllGlobals();
 });
 

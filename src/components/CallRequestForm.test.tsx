@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import CallRequestForm from './CallRequestForm';
 
 function fillValidForm() {
@@ -53,7 +53,10 @@ describe('CallRequestForm', () => {
     fillValidForm();
     fireEvent.click(submitButton());
     const done = await screen.findByRole('button', { name: 'Done' });
-    expect(document.activeElement).toBe(screen.getByRole('heading', { name: /call you soon/i }));
+    // Focus moves in a React effect, which can run just after the success screen renders.
+    await waitFor(() =>
+      expect(document.activeElement).toBe(screen.getByRole('heading', { name: /call you soon/i })),
+    );
     fireEvent.click(done);
     expect(onDone).toHaveBeenCalledTimes(1);
   });

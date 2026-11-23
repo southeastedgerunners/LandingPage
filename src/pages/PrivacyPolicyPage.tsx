@@ -1,15 +1,17 @@
-import './PrivacyPolicyPage.css';
+import './LegalPage.css';
+import { usePageTitle } from '../lib/usePageTitle';
 
 function PrivacyPolicyPage() {
+  usePageTitle('Privacy Policy', 'How SouthEast EdgeRunners collects, uses and protects your information, including SMS messages.');
   return (
-    <div className="privacy">
-      <div className="page-section">
+    <article className="legal">
+      <header className="legal__header">
         <h1>Privacy Policy</h1>
-        <p className="privacy__updated">Last updated: April 2026</p>
-      </div>
+        <p className="legal__updated">Last updated: April 2026</p>
+      </header>
 
-      <div className="privacy__body">
-        <section className="privacy__section">
+      <div className="legal__body">
+        <section className="legal__section">
           <h2>Information We Collect</h2>
           <p>
             When you contact us or use our services, we may collect personal information such as your
@@ -18,7 +20,7 @@ function PrivacyPolicyPage() {
           </p>
         </section>
 
-        <section className="privacy__section">
+        <section className="legal__section">
           <h2>How We Use Your Information</h2>
           <p>We use the information we collect to:</p>
           <ul>
@@ -29,7 +31,7 @@ function PrivacyPolicyPage() {
           </ul>
         </section>
 
-        <section className="privacy__section">
+        <section className="legal__section">
           <h2>Data Sharing</h2>
           <p>
             We do not sell, trade, or rent your personal information to third parties. We may share
@@ -38,7 +40,7 @@ function PrivacyPolicyPage() {
           </p>
         </section>
 
-        <section className="privacy__section">
+        <section className="legal__section">
           <h2>Cookies</h2>
           <p>
             Our website may use cookies to enhance your browsing experience. You can choose to
@@ -47,7 +49,7 @@ function PrivacyPolicyPage() {
           </p>
         </section>
 
-        <section className="privacy__section">
+        <section className="legal__section">
           <h2>Data Security</h2>
           <p>
             We implement reasonable security measures to protect your personal information. However,
@@ -55,7 +57,7 @@ function PrivacyPolicyPage() {
           </p>
         </section>
 
-        <section className="privacy__section">
+        <section className="legal__section">
           <h2>SMS / Text Message Communications</h2>
           <p>
             By submitting our contact form and checking the SMS consent box, you agree to receive
@@ -66,25 +68,25 @@ function PrivacyPolicyPage() {
           <ul>
             <li><strong>Opt-in:</strong> SMS consent is obtained at the time you submit our "Request a Call" form.</li>
             <li><strong>Opt-out:</strong> Reply <strong>STOP</strong> at any time to unsubscribe from SMS messages. You will receive a one-time confirmation and no further messages will be sent.</li>
-            <li><strong>Help:</strong> Reply <strong>HELP</strong> for assistance or contact us at <a href="mailto:contact@southeastedgerunners.com" className="privacy__link">contact@southeastedgerunners.com</a>.</li>
+            <li><strong>Help:</strong> Reply <strong>HELP</strong> for assistance or contact us at <a href="mailto:contact@southeastedgerunners.com" className="legal__link">contact@southeastedgerunners.com</a>.</li>
             <li><strong>Frequency:</strong> Message frequency varies based on your inquiry.</li>
             <li><strong>Rates:</strong> Message and data rates may apply depending on your carrier and plan.</li>
             <li><strong>Sharing:</strong> Your phone number and SMS consent are never sold or shared with third parties for their own marketing purposes.</li>
           </ul>
         </section>
 
-        <section className="privacy__section">
+        <section className="legal__section">
           <h2>Contact Us</h2>
           <p>
             If you have any questions about this Privacy Policy, please contact us at{' '}
-            <a href="mailto:contact@southeastedgerunners.com" className="privacy__link">
+            <a href="mailto:contact@southeastedgerunners.com" className="legal__link">
               contact@southeastedgerunners.com
             </a>
             .
           </p>
         </section>
       </div>
-    </div>
+    </article>
   );
 }
 

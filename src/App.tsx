@@ -3,10 +3,9 @@ import Layout from './components/Layout';
 import HomePage from './pages/HomePage';
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 import TermsPage from './pages/TermsPage';
-import EstimatorPage from './pages/EstimatorPage';
-import EstimatorResultsPage from './pages/EstimatorResultsPage';
 import QuickContactPage from './pages/QuickContactPage';
 import ContactPage from './pages/ContactPage';
+import NotFoundPage from './pages/NotFoundPage';
 
 function App() {
   return (
@@ -15,10 +14,9 @@ function App() {
         <Route index element={<HomePage />} />
         <Route path="privacy" element={<PrivacyPolicyPage />} />
         <Route path="terms" element={<TermsPage />} />
-        <Route path="estimator" element={<EstimatorPage />} />
-        <Route path="estimator/results" element={<EstimatorResultsPage />} />
         <Route path="quick-contact" element={<QuickContactPage />} />
         <Route path="contact" element={<ContactPage />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>
   );

@@ -1,5 +1,7 @@
 import './LegalPage.css';
 import { usePageTitle } from '../lib/usePageTitle';
+import { CONTACT_EMAIL } from '../lib/contact';
+import Placeholder from '../components/Placeholder';
 
 function TermsPage() {
   usePageTitle('Terms and Conditions', 'Terms for SMS messages and website forms from SouthEast EdgeRunners: consent, frequency, rates, and how to opt out.');
@@ -36,10 +38,13 @@ function TermsPage() {
 
         <section className="legal__section">
           <h2>Message and Data Rates</h2>
+          {/* TODO(legal): the "Message and data rates" sentence is stated twice in this paragraph.
+              Owner is updating the wording; do not edit it here. */}
           <p>
             Message and data rates may apply based on your mobile carrier plan. Message and data
             rates may be charged by your wireless carrier. We are not responsible for any carrier
-            charges incurred.
+            charges incurred.{' '}
+            <Placeholder>duplicated "Message and data rates" wording to be updated</Placeholder>
           </p>
         </section>
 
@@ -57,8 +62,8 @@ function TermsPage() {
           <p>
             For assistance or questions about our messaging, reply <strong>HELP</strong> to any
             message or contact us at{' '}
-            <a href="mailto:contact@southeastedgerunners.com" className="legal__link">
-              contact@southeastedgerunners.com
+            <a href={`mailto:${CONTACT_EMAIL}`} className="legal__link">
+              {CONTACT_EMAIL}
             </a>
             .
           </p>
@@ -86,8 +91,8 @@ function TermsPage() {
           <ul>
             <li>
               <strong>Email:</strong>{' '}
-              <a href="mailto:contact@southeastedgerunners.com" className="legal__link">
-                contact@southeastedgerunners.com
+              <a href={`mailto:${CONTACT_EMAIL}`} className="legal__link">
+                {CONTACT_EMAIL}
               </a>
             </li>
             <li>

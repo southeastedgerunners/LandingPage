@@ -1,5 +1,7 @@
 import './LegalPage.css';
 import { usePageTitle } from '../lib/usePageTitle';
+import { CONTACT_EMAIL } from '../lib/contact';
+import Placeholder from '../components/Placeholder';
 
 function PrivacyPolicyPage() {
   usePageTitle('Privacy Policy', 'How SouthEast EdgeRunners collects, uses and protects your information, including SMS messages.');
@@ -66,9 +68,14 @@ function PrivacyPolicyPage() {
             relevant business automation updates.
           </p>
           <ul>
-            <li><strong>Opt-in:</strong> SMS consent is obtained at the time you submit our "Request a Call" form.</li>
+            {/* TODO(legal): this names only the "Request a Call" form, but the intake form also
+                collects SMS consent. Owner is updating the wording; do not edit it here. */}
+            <li>
+              <strong>Opt-in:</strong> SMS consent is obtained at the time you submit our "Request a Call" form.{' '}
+              <Placeholder>SMS opt-in wording to be updated</Placeholder>
+            </li>
             <li><strong>Opt-out:</strong> Reply <strong>STOP</strong> at any time to unsubscribe from SMS messages. You will receive a one-time confirmation and no further messages will be sent.</li>
-            <li><strong>Help:</strong> Reply <strong>HELP</strong> for assistance or contact us at <a href="mailto:contact@southeastedgerunners.com" className="legal__link">contact@southeastedgerunners.com</a>.</li>
+            <li><strong>Help:</strong> Reply <strong>HELP</strong> for assistance or contact us at <a href={`mailto:${CONTACT_EMAIL}`} className="legal__link">{CONTACT_EMAIL}</a>.</li>
             <li><strong>Frequency:</strong> Message frequency varies based on your inquiry.</li>
             <li><strong>Rates:</strong> Message and data rates may apply depending on your carrier and plan.</li>
             <li><strong>Sharing:</strong> Your phone number and SMS consent are never sold or shared with third parties for their own marketing purposes.</li>
@@ -79,8 +86,8 @@ function PrivacyPolicyPage() {
           <h2>Contact Us</h2>
           <p>
             If you have any questions about this Privacy Policy, please contact us at{' '}
-            <a href="mailto:contact@southeastedgerunners.com" className="legal__link">
-              contact@southeastedgerunners.com
+            <a href={`mailto:${CONTACT_EMAIL}`} className="legal__link">
+              {CONTACT_EMAIL}
             </a>
             .
           </p>

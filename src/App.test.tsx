@@ -49,4 +49,15 @@ describe('routes', () => {
     renderAt('/terms');
     expect(document.querySelector('meta[name="description"]')?.getAttribute('content')).toMatch(/^Terms for SMS/);
   });
+
+  it('shows the owner-content placeholders on the homepage instead of invented content', () => {
+    renderAt('/');
+    for (const text of [
+      '[PLACEHOLDER: business phone number]',
+      '[PLACEHOLDER: pricing: how projects are priced and any monthly costs]',
+    ]) {
+      expect(screen.getByText(text)).toBeTruthy();
+    }
+    expect(screen.getByRole('img', { name: /placeholder for a photo/i })).toBeTruthy();
+  });
 });

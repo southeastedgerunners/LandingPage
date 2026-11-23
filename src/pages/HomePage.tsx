@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Modal from '../components/Modal';
 import IntakeForm from '../components/IntakeForm';
 import { useCallRequest } from '../components/CallRequestContext';
+import Placeholder from '../components/Placeholder';
 import {
   heroTitle,
   heroLead,
@@ -98,13 +99,28 @@ function HomePage() {
         </section>
 
         <section className="about" aria-labelledby="about-title">
-          <h2 id="about-title">Local, and easy to reach</h2>
+          <div className="about__intro">
+            <h2 id="about-title">Local, and easy to reach</h2>
+            {/* TODO(content): replace with a real photo of the founder. See PLACEHOLDERS.md. */}
+            <div className="about__photo" role="img" aria-label={`Placeholder for a photo of ${FOUNDER_NAME}`}>
+              <Placeholder>photo of {FOUNDER_NAME}</Placeholder>
+            </div>
+          </div>
           <div className="about__body">
-            <p className="about__text">
-              SouthEast EdgeRunners is run by {FOUNDER_NAME}, working with small businesses across{' '}
-              {SERVICE_AREA}.
-            </p>
+            <div className="about__text">
+              <p>
+                SouthEast EdgeRunners is run by {FOUNDER_NAME}, working with small businesses across{' '}
+                {SERVICE_AREA}.
+              </p>
+              {/* TODO(content): first-person intro from the founder. See PLACEHOLDERS.md. */}
+              <Placeholder block>2–3 first-person sentences from {FOUNDER_NAME}: who you are and why you work locally</Placeholder>
+            </div>
             <dl className="about__facts">
+              <div>
+                <dt>Phone</dt>
+                {/* TODO(content): business phone number. See PLACEHOLDERS.md. */}
+                <dd><Placeholder>business phone number</Placeholder></dd>
+              </div>
               <div>
                 <dt>Email</dt>
                 <dd><a className="inline-link" href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a></dd>
@@ -119,6 +135,22 @@ function HomePage() {
               </div>
             </dl>
           </div>
+        </section>
+
+        <section className="questions" aria-labelledby="questions-title">
+          <h2 id="questions-title">Before you call</h2>
+          <dl className="questions__list">
+            <div className="question">
+              <dt>What does it cost?</dt>
+              {/* TODO(content): honest pricing information from the owner. See PLACEHOLDERS.md. */}
+              <dd><Placeholder block>pricing: how projects are priced and any monthly costs</Placeholder></dd>
+            </div>
+            <div className="question">
+              <dt>What happens on the call?</dt>
+              {/* TODO(content): what the first call covers. See PLACEHOLDERS.md. */}
+              <dd><Placeholder block>what happens on the first call, how long it takes, and what comes after</Placeholder></dd>
+            </div>
+          </dl>
         </section>
 
         <section className="closing" aria-labelledby="closing-title">

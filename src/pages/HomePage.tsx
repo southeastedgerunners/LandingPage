@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useLayoutEffect, useRef, useState } from 'react';
 import Modal from '../components/Modal';
 import IntakeForm from '../components/IntakeForm';
 import { useCallRequest } from '../components/CallRequestContext';
@@ -17,11 +17,40 @@ import { FOUNDER_NAME, RESPONSE_PROMISE, SERVICE_AREA } from '../lib/contact';
 import './HomePage.css';
 import { usePageTitle } from '../lib/usePageTitle';
 
+/**
+ * Holds the worked example's log back until half of it is on screen, then plays it once.
+ * Without IntersectionObserver the state stays undefined and the log shows complete.
+ */
+function useExampleLog() {
+  const ref = useRef<HTMLElement>(null);
+  const [state, setState] = useState<'waiting' | 'playing'>();
+
+  useLayoutEffect(() => {
+    const figure = ref.current;
+    if (!figure || typeof IntersectionObserver === 'undefined') return;
+    setState('waiting');
+    // The first callback fires whatever the overlap, so check the ratio, not just isIntersecting.
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.intersectionRatio < 0.5) return;
+        setState('playing');
+        observer.disconnect();
+      },
+      { threshold: 0.5 },
+    );
+    observer.observe(figure);
+    return () => observer.disconnect();
+  }, []);
+
+  return { ref, state };
+}
+
 function HomePage() {
   usePageTitle();
   const openCallRequest = useCallRequest();
   const [isIntakeOpen, setIsIntakeOpen] = useState(false);
   const [intakeKey, setIntakeKey] = useState(0);
+  const exampleLog = useExampleLog();
 
   const intakeLink = (label: string) => (
     <button type="button" className="text-link" onClick={() => setIsIntakeOpen(true)}>
@@ -48,7 +77,7 @@ function HomePage() {
             </div>
           </div>
 
-          <figure className="example" aria-labelledby="example-caption">
+          <figure className="example" aria-labelledby="example-caption" ref={exampleLog.ref} data-log={exampleLog.state}>
             <ol className="example__log">
               {exampleSteps.map((step, i) => (
                 <li

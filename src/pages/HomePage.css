@@ -115,16 +115,21 @@
   }
 }
 
-/* The one authored moment: the log plays out once, the way the evening would. */
+/* The one authored moment: the log plays out once, the way the evening would,
+   when it scrolls into view (HomePage sets data-log). Without data-log it shows complete. */
 @media (prefers-reduced-motion: no-preference) {
-  .example__step {
-    animation: log-line 480ms var(--ease-out) backwards;
-    animation-delay: calc(350ms + var(--step) * 520ms);
+  .example[data-log='waiting'] .example__step {
+    opacity: 0;
   }
 
-  .example__step--outcome::after {
+  .example[data-log='playing'] .example__step {
+    animation: log-line 480ms var(--ease-out) backwards;
+    animation-delay: calc(150ms + var(--step) * 520ms);
+  }
+
+  .example[data-log='playing'] .example__step--outcome::after {
     animation: log-outcome 360ms var(--ease-out) backwards;
-    animation-delay: calc(500ms + var(--step) * 520ms);
+    animation-delay: calc(300ms + var(--step) * 520ms);
   }
 }
 

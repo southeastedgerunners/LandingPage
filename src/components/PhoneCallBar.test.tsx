@@ -1,25 +1,9 @@
-import { act, fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { CallRequestProvider } from './CallRequestContext';
 import PhoneCallBar, { contactRegion } from './PhoneCallBar';
-
-let observers: FakeObserver[] = [];
-
-class FakeObserver {
-  targets: Element[] = [];
-  constructor(private callback: IntersectionObserverCallback) {
-    observers.push(this);
-  }
-  observe(target: Element) {
-    this.targets.push(target);
-  }
-  disconnect() {}
-  report(isIntersecting: boolean) {
-    const entries = this.targets.map(target => ({ target, isIntersecting }) as IntersectionObserverEntry);
-    act(() => this.callback(entries, this as unknown as IntersectionObserver));
-  }
-}
+import { FakeIntersectionObserver } from '../test/fakeIntersectionObserver';
 
 function renderPage({ withRegion }: { withRegion: boolean }) {
   render(
@@ -34,9 +18,11 @@ function renderPage({ withRegion }: { withRegion: boolean }) {
 
 const barButton = () => screen.queryByRole('button', { name: 'Request a Call' });
 
+const observer = () => FakeIntersectionObserver.instances[0];
+
 beforeEach(() => {
-  observers = [];
-  vi.stubGlobal('IntersectionObserver', FakeObserver);
+  FakeIntersectionObserver.instances = [];
+  vi.stubGlobal('IntersectionObserver', FakeIntersectionObserver);
 });
 
 afterEach(() => {
@@ -46,14 +32,14 @@ afterEach(() => {
 describe('PhoneCallBar', () => {
   it('stays hidden while the page’s own contact actions are on screen', () => {
     renderPage({ withRegion: true });
-    observers[0].report(true);
+    observer().report(true);
     expect(barButton()).toBeNull();
   });
 
   it('appears once the page’s contact actions scroll away', () => {
     renderPage({ withRegion: true });
-    observers[0].report(true);
-    observers[0].report(false);
+    observer().report(true);
+    observer().report(false);
     expect(barButton()).not.toBeNull();
   });
 

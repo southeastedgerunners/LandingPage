@@ -10,8 +10,14 @@
   box-shadow: var(--shadow-modal);
 }
 
+/* Phones: the long intake form opens as a full-screen sheet rather than a box in a box. */
 .modal--wide {
-  max-width: 560px;
+  width: 100%;
+  max-width: 100%;
+  height: 100dvh;
+  max-height: 100dvh;
+  border: none;
+  border-radius: 0;
 }
 
 .modal--slim {
@@ -74,6 +80,11 @@
   color: var(--color-text);
 }
 
+.modal--wide .modal__close {
+  position: fixed;
+  background: var(--color-elevated);
+}
+
 .modal .lead-form__header h2,
 .modal .lead-form--success h2 {
   padding-right: 2.75rem;
@@ -82,5 +93,19 @@
 @media (min-width: 561px) {
   .modal__body {
     padding: 2rem;
+  }
+
+  .modal--wide {
+    width: calc(100% - 2rem);
+    max-width: 560px;
+    height: auto;
+    max-height: 90vh;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-card);
+  }
+
+  .modal--wide .modal__close {
+    position: absolute;
+    background: var(--color-wash);
   }
 }

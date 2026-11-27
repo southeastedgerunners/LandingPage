@@ -7,7 +7,7 @@
 /* ── Hero ── */
 .hero {
   display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  grid-template-columns: 1fr;
   align-items: center;
   gap: clamp(2.5rem, 1rem + 4vw, 4.5rem);
   padding-top: clamp(1.5rem, 0.5rem + 3vw, 3.5rem);
@@ -25,7 +25,7 @@
   font-weight: 800;
   line-height: var(--leading-tight);
   letter-spacing: -0.02em;
-  max-width: 11ch;
+  max-width: 14ch;
 }
 
 .hero__lead {
@@ -53,8 +53,9 @@
 
 /* ── Worked example: a missed call, handled ── */
 .example {
+  max-width: 34rem;
   margin: 0;
-  padding: 1.5rem 1.5rem 1.25rem;
+  padding: 1.25rem 1rem 1rem;
   background: var(--color-elevated);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-card);
@@ -71,7 +72,7 @@
 .example__step {
   position: relative;
   display: grid;
-  grid-template-columns: 4.75rem minmax(0, 1fr);
+  grid-template-columns: 1fr;
   grid-template-rows: auto auto;
   column-gap: 1.25rem;
   padding: 0 0 1.25rem 1.25rem;
@@ -142,7 +143,6 @@
 }
 
 .example__time {
-  grid-row: 1 / 3;
   font-size: var(--text-label);
   font-variant-numeric: tabular-nums;
   color: var(--color-muted);
@@ -187,7 +187,7 @@
 
 .service-group {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+  grid-template-columns: 1fr;
   gap: 1.5rem 3rem;
   padding-block: 2rem;
   border-top: 1px solid var(--color-border);
@@ -242,20 +242,22 @@
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 2.5rem;
+  grid-template-columns: 1fr;
+  gap: 2rem;
 }
 
 .process__step {
   counter-increment: step;
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
+  display: grid;
+  grid-template-columns: 2.5rem minmax(0, 1fr);
+  column-gap: 1rem;
+  row-gap: 0.4rem;
 }
 
 .process__step::before {
   content: counter(step);
-  font-size: var(--text-numeral);
+  grid-row: 1 / 3;
+  font-size: var(--text-heading);
   font-stretch: var(--stretch-display);
   font-weight: 800;
   line-height: 1;
@@ -272,14 +274,14 @@
 /* ── About ── */
 .about {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+  grid-template-columns: 1fr;
   gap: 1.5rem 3rem;
   align-items: start;
 }
 
 .about__body {
   display: grid;
-  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  grid-template-columns: 1fr;
   gap: 2rem 3rem;
 }
 
@@ -335,8 +337,8 @@
 .questions__list {
   margin: 0;
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 2rem 2.5rem;
+  grid-template-columns: 1fr;
+  gap: 2rem;
 }
 
 .question dt {
@@ -400,6 +402,11 @@
   margin-top: 0.75rem;
 }
 
+.hero__actions .cta-button,
+.closing__actions .cta-button {
+  width: 100%;
+}
+
 .closing__alt {
   margin: 0;
   color: var(--color-muted);
@@ -407,60 +414,61 @@
   overflow-wrap: anywhere;
 }
 
-/* ── Responsive ── */
-@media (max-width: 900px) {
-  .hero {
-    grid-template-columns: 1fr;
-  }
-
-  .hero__title {
-    max-width: 14ch;
-  }
-
-  .example {
-    max-width: 34rem;
-  }
-
-  .service-group,
-  .about,
-  .about__body {
-    grid-template-columns: 1fr;
-  }
-
-  .process__steps,
-  .questions__list {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-
-  .process__step {
-    display: grid;
-    grid-template-columns: 2.5rem minmax(0, 1fr);
-    column-gap: 1rem;
-    row-gap: 0.4rem;
-  }
-
-  .process__step::before {
-    grid-row: 1 / 3;
-    font-size: var(--text-heading);
-  }
-}
-
-@media (max-width: 560px) {
+/* ── Wider screens ── */
+@media (min-width: 561px) {
   .hero__actions .cta-button,
   .closing__actions .cta-button {
-    width: 100%;
+    width: auto;
   }
 
   .example {
-    padding: 1.25rem 1rem 1rem;
+    padding: 1.5rem 1.5rem 1.25rem;
   }
 
   .example__step {
-    grid-template-columns: 1fr;
+    grid-template-columns: 4.75rem minmax(0, 1fr);
   }
 
   .example__time {
-    grid-row: auto;
+    grid-row: 1 / 3;
+  }
+}
+
+@media (min-width: 901px) {
+  .hero {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  }
+
+  .hero__title {
+    max-width: 11ch;
+  }
+
+  .service-group,
+  .about {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+  }
+
+  .about__body {
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  }
+
+  .process__steps {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2.5rem;
+  }
+
+  .questions__list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2rem 2.5rem;
+  }
+
+  .process__step {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .process__step::before {
+    font-size: var(--text-numeral);
   }
 }

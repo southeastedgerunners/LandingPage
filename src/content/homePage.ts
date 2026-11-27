@@ -99,3 +99,11 @@ export const steps: Step[] = [
     description: 'Leads get a reply, appointments get booked, invoices go out. You get back to the work.',
   },
 ];
+
+export const sampleSites = {
+  title: 'See the kind of site we build',
+  lead: 'Seven sample sites for made-up local shops, salons and farms. Each one has its own look, and each one works on a phone first.',
+  linkLabel: 'Browse the sample sites',
+  href: '/samples/',
+  previews: ['auto-3', 'salon-2', 'farm-2', 'auto-2'],
+};

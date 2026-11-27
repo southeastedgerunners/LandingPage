@@ -12,6 +12,7 @@ import {
   exampleCaption,
   serviceGroups,
   steps,
+  sampleSites,
 } from '../content/homePage';
 import { FOUNDER_NAME, RESPONSE_PROMISE, SERVICE_AREA } from '../lib/contact';
 import './HomePage.css';
@@ -127,6 +128,20 @@ function HomePage() {
               </li>
             ))}
           </ol>
+        </section>
+
+        {/* The samples are static pages in public/samples, so these are plain links that leave the app router. */}
+        <section className="samples" aria-labelledby="samples-title">
+          <div className="samples__intro">
+            <h2 id="samples-title">{sampleSites.title}</h2>
+            <p>{sampleSites.lead}</p>
+            <a className="inline-link samples__link" href={sampleSites.href}>{sampleSites.linkLabel}</a>
+          </div>
+          <a className="samples__strip" href={sampleSites.href} tabIndex={-1} aria-hidden="true">
+            {sampleSites.previews.map(slug => (
+              <img key={slug} src={`${sampleSites.href}img/${slug}-thumb.webp`} alt="" width={260} height={532} loading="lazy" decoding="async" />
+            ))}
+          </a>
         </section>
 
         <section className="about" aria-labelledby="about-title">

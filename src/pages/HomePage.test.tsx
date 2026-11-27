@@ -38,3 +38,13 @@ describe('worked example log', () => {
     expect(figure.getAttribute('data-log')).toBe('playing');
   });
 });
+
+describe('sample sites', () => {
+  it('links to the sample sites as a full page load, outside the app router', () => {
+    vi.stubGlobal('IntersectionObserver', undefined);
+    renderExample();
+    const link = screen.getByRole('link', { name: 'Browse the sample sites' });
+    expect(link.getAttribute('href')).toBe('/samples/');
+    expect(screen.getByRole('heading', { level: 2, name: 'See the kind of site we build' })).toBeTruthy();
+  });
+});

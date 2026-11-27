@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="50" height="76" viewBox="0 0 50 76">
+<defs><clipPath id="p0"><path d="M7 61C7 70 15 75 25 75C35 75 43 70 43 61L43 9C43 5.5 41 4 37.5 4L12.5 4C9 4 7 5.5 7 9Z" /></clipPath></defs>
+<path d="M7 61C7 70 15 75 25 75C35 75 43 70 43 61L43 9C43 5.5 41 4 37.5 4L12.5 4C9 4 7 5.5 7 9Z" fill="#FFFFFF" />
+<g clip-path="url(#p0)">
+<path d="M7 1h6v6h-6ZM7 13h6v6h-6ZM7 25h6v6h-6ZM7 37h6v6h-6ZM7 49h6v6h-6ZM7 61h6v6h-6ZM7 73h6v6h-6ZM13 7h6v6h-6ZM13 19h6v6h-6ZM13 31h6v6h-6ZM13 43h6v6h-6ZM13 55h6v6h-6ZM13 67h6v6h-6ZM19 1h6v6h-6ZM19 13h6v6h-6ZM19 25h6v6h-6ZM19 37h6v6h-6ZM19 49h6v6h-6ZM19 61h6v6h-6ZM19 73h6v6h-6ZM25 7h6v6h-6ZM25 19h6v6h-6ZM25 31h6v6h-6ZM25 43h6v6h-6ZM25 55h6v6h-6ZM25 67h6v6h-6ZM31 1h6v6h-6ZM31 13h6v6h-6ZM31 25h6v6h-6ZM31 37h6v6h-6ZM31 49h6v6h-6ZM31 61h6v6h-6ZM31 73h6v6h-6ZM37 7h6v6h-6ZM37 19h6v6h-6ZM37 31h6v6h-6ZM37 43h6v6h-6ZM37 55h6v6h-6ZM37 67h6v6h-6Z" fill="#111111" />
+</g>
+<path d="M7 61C7 70 15 75 25 75C35 75 43 70 43 61L43 9C43 5.5 41 4 37.5 4L12.5 4C9 4 7 5.5 7 9Z" fill="none" stroke="#00000073" />
+<path d="M12.5 60C11.8 46 11.8 28 12.6 11" fill="none" stroke="#FFFFFFB3" stroke-width="3" stroke-linecap="round" />
+<circle cx="13.5" cy="66" r="1.4" fill="#FFFFFFCC" />
+</svg>

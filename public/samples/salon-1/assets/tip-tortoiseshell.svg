@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="50" height="76" viewBox="0 0 50 76">
+<defs><clipPath id="p0"><path d="M7 61C7 70 15 75 25 75C35 75 43 70 43 61L43 33C43 18 33 6 25 2C17 6 7 18 7 33Z" /></clipPath></defs>
+<path d="M7 61C7 70 15 75 25 75C35 75 43 70 43 61L43 33C43 18 33 6 25 2C17 6 7 18 7 33Z" fill="#C98031" />
+<g clip-path="url(#p0)">
+<path d="M14 10C20 8 26 12 24 18C22 23 15 22 12 18C10 15 11 11 14 10Z" fill="#8A3D15D9" />
+<path d="M28 22C34 20 41 25 39 31C37 36 30 35 27 31C25 28 25 23 28 22Z" fill="#4C1D0CE6" />
+<path d="M8 34C13 31 20 35 19 41C18 46 11 46 8 43C6 40 6 36 8 34Z" fill="#4C1D0CE6" />
+<path d="M26 42C31 40 36 44 35 49C34 53 28 53 26 50C24 47 23 43 26 42Z" fill="#8A3D15D9" />
+<path d="M33 54C38 52 45 57 43 63C41 67 35 66 33 62C31 59 31 55 33 54Z" fill="#4C1D0CE6" />
+<path d="M12 56C17 54 22 58 21 63C20 67 14 67 12 64C10 61 10 57 12 56Z" fill="#6A2A10D9" />
+<circle cx="22" cy="31" r="2.2" fill="#E8B45ACC" />
+<circle cx="30" cy="66" r="2" fill="#E8B45AB3" />
+<circle cx="18" cy="49" r="1.6" fill="#8A3D15" />
+</g>
+<path d="M7 61C7 70 15 75 25 75C35 75 43 70 43 61L43 33C43 18 33 6 25 2C17 6 7 18 7 33Z" fill="none" stroke="#3A0A0573" />
+<path d="M12.5 60C11.5 47 12 31 17 18" fill="none" stroke="#FFFFFFD9" stroke-width="3" stroke-linecap="round" />
+<circle cx="13.5" cy="66" r="1.4" fill="#FFFFFFBF" />
+</svg>

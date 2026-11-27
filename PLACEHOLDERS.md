@@ -43,4 +43,4 @@ All in `src/pages/HomePage.tsx`. Don't fill these with invented content, numbers
 
 ## Future work
 
-The owner plans a few more traditional-looking pages, different from the pink and cyan advertising style of the homepage, to show potential business clients. These are **not designed or built yet**. When that starts, treat them as a new surface: write a brief with `/impeccable shape` first, and decide whether they share DESIGN.md's tokens or need their own system.
+Seven sample sites for fictional businesses, each in its own visual style, now live in `public/samples/` and are linked from the homepage's "See the kind of site we build" section. Their design briefs are in `.impeccable/surfaces/paper-sample-pages-*.md`; they do not use DESIGN.md's tokens. `tools/samples/build.py` rebuilds the samples home page and its thumbnails.

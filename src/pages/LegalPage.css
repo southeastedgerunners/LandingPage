@@ -72,6 +72,14 @@
   overflow-wrap: anywhere;
 }
 
+.legal__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 1.5rem;
+  padding-top: 2rem;
+}
+
 .legal__link:hover {
   color: var(--color-text);
 }

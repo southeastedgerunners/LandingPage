@@ -23,6 +23,13 @@ describe('routes', () => {
     expect(document.title).toBe('Page not found · SouthEast EdgeRunners');
   });
 
+  it('offers the homepage and a call request from the not-found page', () => {
+    renderAt('/estimator');
+    expect(screen.getByRole('link', { name: 'Go to the homepage' }).getAttribute('href')).toBe('/');
+    fireEvent.click(screen.getByRole('button', { name: 'Or request a call' }));
+    expect(screen.getByRole('dialog')).toBeTruthy();
+  });
+
   it('gives each page its own title', () => {
     renderAt('/privacy');
     expect(document.title).toBe('Privacy Policy · SouthEast EdgeRunners');

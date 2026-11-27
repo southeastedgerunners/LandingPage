@@ -116,7 +116,7 @@
 
 .footer__link {
   display: inline-block;
-  padding-block: 0.6rem;
+  padding-block: 0.625rem;
   color: var(--color-muted);
   text-decoration: underline;
   text-decoration-color: var(--color-border);

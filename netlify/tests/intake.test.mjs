@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { handler } from './intake.mjs';
+import { handler } from '../functions/intake.mjs';
 
 describe('intake function (placeholder while the lead pipeline is rebuilt)', () => {
   it('does not claim delivery: POST answers 503 with delivered false', async () => {

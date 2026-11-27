@@ -1,6 +1,7 @@
 import { Link, Outlet } from 'react-router-dom';
 import TawkWidget from './TawkWidget';
 import RouteChange from './RouteChange';
+import PhoneCallBar from './PhoneCallBar';
 import { CallRequestProvider, useCallRequest } from './CallRequestContext';
 import { SERVICE_AREA } from '../lib/contact';
 import EmailLink from './EmailLink';
@@ -10,7 +11,7 @@ import './Layout.css';
 function HeaderCallButton() {
   const openCallRequest = useCallRequest();
   return (
-    <button type="button" className="cta-button cta-button--compact" onClick={openCallRequest}>
+    <button type="button" className="cta-button cta-button--compact site-header__call" onClick={openCallRequest}>
       Request a Call
     </button>
   );
@@ -53,6 +54,7 @@ function Layout() {
           <p className="footer__copyright">© {new Date().getFullYear()} SouthEast EdgeRunners. All rights reserved.</p>
         </footer>
 
+        <PhoneCallBar />
         <TawkWidget />
       </div>
     </CallRequestProvider>

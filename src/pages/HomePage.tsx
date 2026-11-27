@@ -4,6 +4,7 @@ import IntakeForm from '../components/IntakeForm';
 import { useCallRequest } from '../components/CallRequestContext';
 import Placeholder from '../components/Placeholder';
 import EmailLink from '../components/EmailLink';
+import { contactRegion } from '../components/PhoneCallBar';
 import {
   heroTitle,
   heroLead,
@@ -35,7 +36,7 @@ function HomePage() {
           <div className="hero__copy">
             <h1 id="hero-title" className="hero__title">{heroTitle}</h1>
             <p className="hero__lead">{heroLead}</p>
-            <div className="hero__actions">
+            <div className="hero__actions" {...contactRegion}>
               <button type="button" className="cta-button" onClick={openCallRequest}>
                 Request a Call
               </button>
@@ -154,7 +155,7 @@ function HomePage() {
           </dl>
         </section>
 
-        <section className="closing" aria-labelledby="closing-title">
+        <section className="closing" aria-labelledby="closing-title" {...contactRegion}>
           <h2 id="closing-title">Tell us what’s eating your week.</h2>
           <p>One short call is enough to find the first thing worth automating.</p>
           <div className="closing__actions">

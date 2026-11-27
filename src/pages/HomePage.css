@@ -28,6 +28,10 @@
   max-width: 14ch;
 }
 
+.hero__title-accent {
+  color: var(--color-accent-alt);
+}
+
 .hero__lead {
   margin: 0;
   max-width: 52ch;
@@ -217,11 +221,11 @@
   grid-template-columns: 1fr;
   gap: 1.5rem 3rem;
   padding-block: 2rem;
-  border-top: 1px solid var(--color-border);
+  border-top: 1px solid var(--color-accent-rule);
 }
 
 .service-group:last-child {
-  border-bottom: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-accent-rule);
 }
 
 .service-group__intro h3 {
@@ -245,6 +249,7 @@
 }
 
 .service dt {
+  color: var(--color-accent);
   font-weight: 650;
   margin-bottom: 0.3rem;
 }
@@ -340,6 +345,10 @@
   line-height: 1;
   color: var(--color-accent);
   font-variant-numeric: tabular-nums;
+}
+
+.process__step:last-child::before {
+  color: var(--color-accent-alt);
 }
 
 .process__step p {
@@ -440,7 +449,7 @@
 
 .about__facts dt {
   font-size: var(--text-label);
-  color: var(--color-muted);
+  color: var(--color-accent);
 }
 
 .about__facts dd {
@@ -459,6 +468,7 @@
   padding: clamp(1.25rem, 0.25rem + 5vw, 3.5rem);
   background: var(--color-elevated);
   border: 1px solid var(--color-border);
+  border-top: 2px solid var(--color-accent-alt);
   border-radius: var(--radius-card);
   display: flex;
   flex-direction: column;

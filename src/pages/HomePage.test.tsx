@@ -48,3 +48,11 @@ describe('sample sites', () => {
     expect(screen.getByRole('heading', { level: 2, name: 'See the kind of site we build' })).toBeTruthy();
   });
 });
+
+describe('hero headline', () => {
+  it('reads as one sentence even though its last word is styled apart', () => {
+    vi.stubGlobal('IntersectionObserver', undefined);
+    renderExample();
+    expect(screen.getByRole('heading', { level: 1 }).textContent).toBe('Let the busywork run itself.');
+  });
+});

@@ -226,7 +226,7 @@
     {
       "name": "Worked Example Log",
       "kind": "custom",
-      "description": "Timestamped log of one automation; the outcome takes the screen's single pink marker.",
+      "description": "Timestamped log of one automation; the outcome takes a pink marker.",
       "html": "<ol class=\"ds-log\"><li><time>4:55 PM</time><b>Missed call</b><span>(606) 555-0142</span></li><li class=\"ds-log--out\"><time>4:58 PM</time><b>Booked</b><span>Thursday, 9:00 AM</span></li></ol>",
       "css": ".ds-log { list-style: none; margin: 0; padding: 1.25rem; background: #353535; border-radius: 10px; } .ds-log li { position: relative; display: grid; grid-template-columns: 4.75rem 1fr; column-gap: 1rem; padding: 0 0 1rem 1.25rem; } .ds-log li::after { content: ''; position: absolute; left: 0; top: 0.4rem; width: 0.55rem; height: 0.55rem; background: #00b5c9; } .ds-log li.ds-log--out::after { background: #ff2d8a; } .ds-log time { grid-row: 1 / 3; font-size: 0.875rem; color: #b6b6b6; font-variant-numeric: tabular-nums; } .ds-log b { font-weight: 650; color: #e6e6e6; } .ds-log span { font-size: 0.9375rem; color: #b6b6b6; }"
     }
@@ -237,7 +237,7 @@
     "keyCharacteristics": [
       "Dark-only theme on Shop Charcoal (#2b2b2b).",
       "One type family, Archivo, condensed for headings and normal width for reading.",
-      "Edge Cyan leads; Runner Pink appears once per screen at most.",
+      "Edge Cyan leads; Runner Pink marks a few chosen moments, never more than cyan.",
       "Small, firm corners (2–10px) that sit with the angular \"ER\" logo.",
       "No glows, no gradients, no decorative cards."
     ],
@@ -249,7 +249,7 @@
       },
       {
         "name": "The Cyan Leads Rule",
-        "body": "Edge Cyan is the lead accent because it is the logo. Runner Pink is rare: at most one pink moment per screen, used for the thing that most deserves a second look.",
+        "body": "Edge Cyan is the lead accent because it is the logo. Runner Pink is the second voice, used sparingly for the moments that deserve a second look: on the homepage, the headline's last word, the outcome step of the process, the Booked marker that ends the worked example, the closing panel's top edge, and text selection. The owner asked for this added pink on 2026-11-27; keep it a light touch rather than spreading it.",
         "section": "colors"
       },
       {

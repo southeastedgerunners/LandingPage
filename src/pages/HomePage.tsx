@@ -18,6 +18,9 @@ import { FOUNDER_NAME, RESPONSE_PROMISE, SERVICE_AREA } from '../lib/contact';
 import './HomePage.css';
 import { usePageTitle } from '../lib/usePageTitle';
 
+// The headline's last word carries the Runner Pink accent.
+const heroAccentAt = heroTitle.lastIndexOf(' ') + 1;
+
 /**
  * Holds the worked example's log back until half of it is on screen, then plays it once.
  * Without IntersectionObserver the state stays undefined and the log shows complete.
@@ -64,7 +67,10 @@ function HomePage() {
       <div className="home">
         <section className="hero" aria-labelledby="hero-title">
           <div className="hero__copy">
-            <h1 id="hero-title" className="hero__title">{heroTitle}</h1>
+            <h1 id="hero-title" className="hero__title">
+              {heroTitle.slice(0, heroAccentAt)}
+              <span className="hero__title-accent">{heroTitle.slice(heroAccentAt)}</span>
+            </h1>
             <p className="hero__lead">{heroLead}</p>
             <div className="hero__actions" {...contactRegion}>
               <button type="button" className="cta-button" onClick={openCallRequest}>

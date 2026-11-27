@@ -120,7 +120,7 @@ The site is built from type, hairlines and a few raised panels rather than cards
 **Key Characteristics:**
 - Dark-only theme on Shop Charcoal (#2b2b2b).
 - One type family, Archivo, condensed for headings and normal width for reading.
-- Edge Cyan leads; Runner Pink appears once per screen at most.
+- Edge Cyan leads; Runner Pink marks a few chosen moments, never more than cyan.
 - Small, firm corners (2–10px) that sit with the angular "ER" logo.
 - No glows, no gradients, no decorative cards.
 
@@ -129,10 +129,10 @@ The site is built from type, hairlines and a few raised panels rather than cards
 A charcoal-and-grey stage with two saturated accents: cyan for action and identity, pink for one deliberate highlight.
 
 ### Primary
-- **Edge Cyan**: the logo color and the working signal. Solid fill of every primary button (with Shop Charcoal text at 5.7:1), links, focus rings, checked checkboxes, step numerals, the markers on the worked example. **Edge Cyan Deep** is kept in the palette but unused.
+- **Edge Cyan**: the logo color and the working signal. Solid fill of every primary button (with Shop Charcoal text at 5.7:1), links, focus rings, checked checkboxes, the first two step numerals, the markers on the worked example, the service names, the contact labels, and (at 30% strength) the hairlines between service groups. **Edge Cyan Deep** is kept in the palette but unused.
 
 ### Secondary
-- **Runner Pink**: the spark, used only as a non-text mark: the "Booked" marker that ends the worked example. Never as small text (4.04:1 fails). Allowed as text only at display size. **Runner Pink Deep** (white text at 6.8:1) is the approved fill if a pink button is ever needed.
+- **Runner Pink**: the spark. As a mark: the "Booked" marker that ends the worked example, the closing panel's 2px top edge, and the text-selection highlight. As text only at display or numeral size: the headline's last word and the third process numeral. Never as small text (4.04:1 fails). **Runner Pink Deep** (white text at 6.8:1) is the approved fill if a pink button is ever needed.
 
 ### Neutral
 - **Shop Charcoal**: page background, and the label color on cyan buttons.
@@ -147,7 +147,7 @@ A charcoal-and-grey stage with two saturated accents: cyan for action and identi
 ### Named Rules
 **The Locked Palette Rule.** The hex values above are fixed by the owner. Fixes change where and how much a color is used, never the values. New colors may be proposed as optional additions, never as replacements.
 
-**The Cyan Leads Rule.** Edge Cyan is the lead accent because it is the logo. Runner Pink is rare: at most one pink moment per screen, used for the thing that most deserves a second look.
+**The Cyan Leads Rule.** Edge Cyan is the lead accent because it is the logo. Runner Pink is the second voice, used sparingly for the moments that deserve a second look: on the homepage, the headline's last word, the outcome step of the process, the Booked marker that ends the worked example, the closing panel's top edge, and text selection. The owner asked for this added pink on 2026-11-27; keep it a light touch rather than spreading it.
 
 **The No Glow Rule.** No colored shadows, drop-shadow halos or gradient fills. Depth comes from Raised Charcoal and hairlines; the only shadow is the neutral one under dialogs.
 
@@ -223,7 +223,7 @@ Small, firm corners: 2px checkboxes, 4px small controls, 6px buttons and fields,
 - Below 561px, a Raised Charcoal strip with a hairline top and a full-width primary button is pinned to the bottom of the screen. It shows only while none of the page's own contact actions (elements marked `data-contact-region`) are on screen, slides up in 180ms, and is hidden from the tab order and screen readers while out of view.
 
 ### Worked example (signature component)
-- A raised panel holding a timestamped log of one automation, joined by a 1px thread with square cyan markers; the outcome gets the screen's single pink marker. Plays in once when half of it is on screen (lines arrive about 0.5s apart); on desktop that is on load. Reduced motion shows it complete. Always captioned as illustrative.
+- A raised panel holding a timestamped log of one automation, joined by a 1px thread with square cyan markers; the outcome gets a pink marker. Plays in once when half of it is on screen (lines arrive about 0.5s apart); on desktop that is on load. Reduced motion shows it complete. Always captioned as illustrative.
 
 ## Do's and Don'ts
 

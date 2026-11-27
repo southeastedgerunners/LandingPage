@@ -3,6 +3,7 @@ import Modal from '../components/Modal';
 import IntakeForm from '../components/IntakeForm';
 import { useCallRequest } from '../components/CallRequestContext';
 import Placeholder from '../components/Placeholder';
+import EmailLink from '../components/EmailLink';
 import {
   heroTitle,
   heroLead,
@@ -11,7 +12,7 @@ import {
   serviceGroups,
   steps,
 } from '../content/homePage';
-import { CONTACT_EMAIL, FOUNDER_NAME, RESPONSE_PROMISE, SERVICE_AREA } from '../lib/contact';
+import { FOUNDER_NAME, RESPONSE_PROMISE, SERVICE_AREA } from '../lib/contact';
 import './HomePage.css';
 import { usePageTitle } from '../lib/usePageTitle';
 
@@ -123,7 +124,7 @@ function HomePage() {
               </div>
               <div>
                 <dt>Email</dt>
-                <dd><a className="inline-link" href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a></dd>
+                <dd><EmailLink className="inline-link" /></dd>
               </div>
               <div>
                 <dt>Reply time</dt>
@@ -162,7 +163,7 @@ function HomePage() {
             </button>
             <p className="closing__alt">
               Or {intakeLink('fill out the intake form')}, or email{' '}
-              <a className="inline-link" href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.
+              <EmailLink className="inline-link" />.
             </p>
           </div>
         </section>

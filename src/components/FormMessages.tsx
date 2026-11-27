@@ -1,4 +1,5 @@
-import { CONTACT_EMAIL, RESPONSE_PROMISE } from '../lib/contact';
+import { RESPONSE_PROMISE } from '../lib/contact';
+import EmailLink from './EmailLink';
 
 /** Inline message under a field that failed validation. Linked from the field by aria-describedby. */
 export function FieldError({ id, message }: { id: string; message?: string }) {
@@ -15,7 +16,7 @@ export function FieldError({ id, message }: { id: string; message?: string }) {
  * "unavailable" means the server told us online requests aren't connected yet.
  */
 export function SubmitError({ unavailable = false }: { unavailable?: boolean }) {
-  const email = <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>;
+  const email = <EmailLink />;
   return (
     <p className="lead-form__error" role="alert">
       {unavailable ? (

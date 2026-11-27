@@ -1,6 +1,6 @@
 import './LegalPage.css';
 import { usePageTitle } from '../lib/usePageTitle';
-import { CONTACT_EMAIL } from '../lib/contact';
+import EmailLink from '../components/EmailLink';
 import Placeholder from '../components/Placeholder';
 
 function TermsPage() {
@@ -62,9 +62,7 @@ function TermsPage() {
           <p>
             For assistance or questions about our messaging, reply <strong>HELP</strong> to any
             message or contact us at{' '}
-            <a href={`mailto:${CONTACT_EMAIL}`} className="legal__link">
-              {CONTACT_EMAIL}
-            </a>
+            <EmailLink className="legal__link" />
             .
           </p>
         </section>
@@ -91,9 +89,7 @@ function TermsPage() {
           <ul>
             <li>
               <strong>Email:</strong>{' '}
-              <a href={`mailto:${CONTACT_EMAIL}`} className="legal__link">
-                {CONTACT_EMAIL}
-              </a>
+              <EmailLink className="legal__link" />
             </li>
             <li>
               <strong>Business:</strong> SouthEast EdgeRunners

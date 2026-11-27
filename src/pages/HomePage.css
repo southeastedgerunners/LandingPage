@@ -53,7 +53,7 @@
 
 /* ── Worked example: a missed call, handled ── */
 .example {
-  max-width: 34rem;
+  container: example / inline-size;
   margin: 0;
   padding: 1.25rem 1rem 1rem;
   background: var(--color-elevated);
@@ -91,6 +91,28 @@
 
 .example__step:last-child {
   padding-bottom: 0;
+}
+
+/* Time beside the entry once the panel can spare the width; a log row on wide panels. */
+@container example (min-width: 20rem) {
+  .example__step {
+    grid-template-columns: 4.75rem minmax(0, 1fr);
+  }
+
+  .example__time {
+    grid-row: 1 / 3;
+  }
+}
+
+@container example (min-width: 38rem) {
+  .example__step {
+    grid-template-columns: 4.75rem 11rem minmax(0, 1fr);
+    grid-template-rows: auto;
+  }
+
+  .example__time {
+    grid-row: auto;
+  }
 }
 
 /* The one authored moment: the log plays out once, the way the evening would. */
@@ -213,7 +235,7 @@
 .service-group__list {
   margin: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(12rem, 100%), 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(12rem, 100%), 1fr));
   gap: 1.5rem 2rem;
 }
 
@@ -371,9 +393,15 @@
   overflow-wrap: anywhere;
 }
 
+.about__facts .inline-link {
+  display: inline-block;
+  padding-block: 0.4rem;
+  margin-block: -0.4rem;
+}
+
 /* ── Closing call to action ── */
 .closing {
-  padding: clamp(2rem, 1rem + 4vw, 3.5rem);
+  padding: clamp(1.25rem, 0.25rem + 5vw, 3.5rem);
   background: var(--color-elevated);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-card);
@@ -424,13 +452,32 @@
   .example {
     padding: 1.5rem 1.5rem 1.25rem;
   }
+}
 
-  .example__step {
-    grid-template-columns: 4.75rem minmax(0, 1fr);
+@media (min-width: 721px) {
+  .service-group,
+  .about {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
   }
 
-  .example__time {
-    grid-row: 1 / 3;
+  .process__steps {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2.5rem;
+  }
+
+  .process__step {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .process__step::before {
+    font-size: var(--text-numeral);
+  }
+
+  .questions__list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2rem 2.5rem;
   }
 }
 
@@ -443,32 +490,7 @@
     max-width: 11ch;
   }
 
-  .service-group,
-  .about {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
-  }
-
   .about__body {
     grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
-  }
-
-  .process__steps {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 2.5rem;
-  }
-
-  .questions__list {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 2rem 2.5rem;
-  }
-
-  .process__step {
-    display: flex;
-    flex-direction: column;
-    gap: 0.6rem;
-  }
-
-  .process__step::before {
-    font-size: var(--text-numeral);
   }
 }

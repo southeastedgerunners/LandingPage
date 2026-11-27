@@ -15,9 +15,9 @@
   --font-sans: 'Archivo Variable', 'Archivo', 'Segoe UI', system-ui, -apple-system, sans-serif;
   --stretch-display: 78%;
   --stretch-heading: 84%;
-  --text-display: clamp(2.5rem, 1.4rem + 4.6vw, 4.5rem);
+  --text-display: clamp(2.875rem, 2rem + 3.6vw, 4.5rem);
   --text-page-title: clamp(2.1rem, 1.5rem + 2.4vw, 3rem);
-  --text-heading: clamp(1.75rem, 1.35rem + 1.6vw, 2.5rem);
+  --text-heading: clamp(2.125rem, 1.75rem + 1vw, 2.5rem);
   --text-subheading: 1.5rem;
   --text-title: 1.25rem;
   --text-lead: clamp(1.125rem, 1.05rem + 0.3vw, 1.25rem);
@@ -28,7 +28,8 @@
   --leading-tight: 1.02;
   --leading-heading: 1.1;
   --leading-body: 1.6;
-  --measure: 65ch;
+  /* `ch` is the width of "0", wider than an average letter: 60ch holds about 72 characters. */
+  --measure: 60ch;
 
   /* ── Palette (locked: see DESIGN.md, The Locked Palette Rule) ── */
   --color-background: #2b2b2b;
@@ -131,8 +132,14 @@ h3 {
 }
 
 p,
-li {
+li,
+dd {
   text-wrap: pretty;
+}
+
+input,
+textarea {
+  caret-color: var(--color-accent);
 }
 
 ::selection {

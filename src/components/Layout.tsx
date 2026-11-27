@@ -2,7 +2,8 @@ import { Link, Outlet } from 'react-router-dom';
 import TawkWidget from './TawkWidget';
 import RouteChange from './RouteChange';
 import { CallRequestProvider, useCallRequest } from './CallRequestContext';
-import { CONTACT_EMAIL, SERVICE_AREA } from '../lib/contact';
+import { SERVICE_AREA } from '../lib/contact';
+import EmailLink from './EmailLink';
 import logoMark from '../assets/logo-mark.webp';
 import './Layout.css';
 
@@ -42,7 +43,7 @@ function Layout() {
             <p className="footer__brand">SouthEast EdgeRunners</p>
             <p>{SERVICE_AREA}</p>
             <p>
-              <a className="footer__link" href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
+              <EmailLink className="footer__link" />
             </p>
           </div>
           <nav className="footer__nav" aria-label="Legal">

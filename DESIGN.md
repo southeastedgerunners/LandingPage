@@ -18,7 +18,7 @@ colors:
 typography:
   display:
     fontFamily: "Archivo Variable, Archivo, Segoe UI, system-ui, sans-serif"
-    fontSize: "clamp(2.5rem, 1.4rem + 4.6vw, 4.5rem)"
+    fontSize: "clamp(2.875rem, 2rem + 3.6vw, 4.5rem)"
     fontWeight: 800
     lineHeight: 1.02
     letterSpacing: "-0.02em"
@@ -30,7 +30,7 @@ typography:
     letterSpacing: "-0.01em"
   heading:
     fontFamily: "Archivo Variable, Archivo, Segoe UI, system-ui, sans-serif"
-    fontSize: "clamp(1.75rem, 1.35rem + 1.6vw, 2.5rem)"
+    fontSize: "clamp(2.125rem, 1.75rem + 1vw, 2.5rem)"
     fontWeight: 760
     lineHeight: 1.1
     letterSpacing: "-0.01em"
@@ -158,20 +158,20 @@ A charcoal-and-grey stage with two saturated accents: cyan for action and identi
 **Character:** a sturdy grotesque with a width axis. Headings run condensed (78–84%) and heavy, like lettering on a work van; reading text runs at normal width.
 
 ### Hierarchy
-- **Display** (800, 78% width, clamp 2.5–4.5rem, line-height 1.02): the homepage headline only.
+- **Display** (800, 78% width, clamp 2.875–4.5rem, line-height 1.02): the homepage headline only.
 - **Page title** (760, 84% width, clamp 2.1–3rem): h1 on inner pages.
-- **Heading** (760, 84% width, clamp 1.75–2.5rem): section headings.
+- **Heading** (760, 84% width, clamp 2.125–2.5rem): section headings. On phones it stays clearly above Subheading.
 - **Subheading** (740, 84% width, 1.5rem): service groups, legal sections, form titles.
 - **Title** (650, 1.25rem): smaller headings such as process steps.
 - **Lead** (400, 1.125–1.25rem): the paragraph under a major heading.
-- **Body** (400, 1.0625rem, line-height 1.6): prose, capped at 65ch.
+- **Body** (400, 1.0625rem, line-height 1.6): prose, capped at 60ch (about 72 characters: `ch` is the width of "0", wider than an average letter).
 - **Small / Label** (0.9375 / 0.875rem): supporting text, form labels, captions, times.
 - **Numeral** (800, 78% width, 3rem, cyan, tabular): process step numbers.
 
 ### Named Rules
 **The One Family Rule.** Archivo only. Hierarchy comes from width, weight and size together, never from a second face.
 
-**The Measure Rule.** Running text stops at 65ch; headings use `text-wrap: balance`, paragraphs `text-wrap: pretty`.
+**The Measure Rule.** Running text stops at 60ch; headings use `text-wrap: balance`, paragraphs `text-wrap: pretty`.
 
 ## Layout
 
@@ -182,7 +182,13 @@ One centered column, max 1120px, padded 2.25rem (1rem on phones). Sections are s
 4. A local "about" block.
 5. A raised closing panel with the call to action.
 
-At 900px every multi-column block stacks; at 560px primary buttons go full width. Inner pages (legal, not-found) are a single 65ch column. Breakpoints are 900px, 720px, 560px and 360px.
+**The Mobile-First Rule.** Base styles are the phone layout; `min-width` queries add wider layouts (361px, 561px, 721px, 901px). A test (`src/mobileFirst.test.mjs`) fails on any `max-width` media query.
+
+- **Phones (up to 560px):** one column, primary buttons full width, the header button hidden in favour of the phone call bar, the intake dialog as a full-screen sheet.
+- **From 721px:** services, the about block (heading and photo | text and facts), the three process steps and the two questions split into columns.
+- **From 901px:** the hero goes two-column, and the about text and facts sit side by side.
+
+The worked example sizes itself with container queries, not the viewport: stacked when narrow, time beside the entry from 20rem, a three-column log row from 38rem. Inner pages (legal, not-found) are a single 60ch column.
 
 ## Elevation & Depth
 
@@ -211,10 +217,13 @@ Small, firm corners: 2px checkboxes, 4px small controls, 6px buttons and fields,
 - Send failures: Error Rose text in a 1px Error Rose outline, announced as an alert, with a working email fallback. Success moves focus to the confirmation heading.
 
 ### Dialogs
-- Native `<dialog>` with `showModal()`: focus moves to the first field, the background is inert, Escape closes, and focus returns to the trigger. Content stays mounted while closed, so an accidental close never loses typing; a form resets only after a successful send. Opens with a 180ms rise; reduced motion gets a fade only.
+- Native `<dialog>` with `showModal()`: focus moves to the first field, the background is inert, Escape closes, and focus returns to the trigger. Content stays mounted while closed, so an accidental close never loses typing; a form resets only after a successful send. Opens with a 180ms rise; reduced motion gets a fade only. Below 561px the intake dialog is a full-screen sheet with its close button pinned in the corner; the short call dialog stays a centered box.
+
+### Phone call bar
+- Below 561px, a Raised Charcoal strip with a hairline top and a full-width primary button is pinned to the bottom of the screen. It shows only while none of the page's own contact actions (elements marked `data-contact-region`) are on screen, slides up in 180ms, and is hidden from the tab order and screen readers while out of view.
 
 ### Worked example (signature component)
-- A raised panel holding a timestamped log of one automation, joined by a 1px thread with square cyan markers; the outcome gets the screen's single pink marker. Plays in once on load (lines arrive about 0.5s apart). Reduced motion shows it complete. Always captioned as illustrative.
+- A raised panel holding a timestamped log of one automation, joined by a 1px thread with square cyan markers; the outcome gets the screen's single pink marker. Plays in once when half of it is on screen (lines arrive about 0.5s apart); on desktop that is on load. Reduced motion shows it complete. Always captioned as illustrative.
 
 ## Do's and Don'ts
 

@@ -49,6 +49,7 @@
   --color-wash-strong: rgba(255, 255, 255, 0.12);
   --color-scrim: rgba(0, 0, 0, 0.72);
   --color-accent-wash: color-mix(in srgb, var(--color-accent) 15%, transparent);
+  --color-accent-rule: color-mix(in srgb, var(--color-accent) 30%, transparent);
   --color-placeholder: color-mix(in srgb, var(--color-muted) 92%, var(--color-elevated));
   --color-field-border: color-mix(in srgb, var(--color-muted) 60%, var(--color-elevated));
 
@@ -143,7 +144,7 @@ textarea {
 }
 
 ::selection {
-  background: var(--color-accent);
+  background: var(--color-accent-alt);
   color: var(--color-background);
 }
 

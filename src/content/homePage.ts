@@ -1,36 +1,109 @@
-// ── How It Works ─────────────────────────────────────────────────────────────
+// Homepage copy. Plain owner language first; tool names go in supporting lines.
+// Nothing here may claim results, clients or numbers we can't show (see PRODUCT.md).
 
-export const auditYourWorkflow =
-  'We map out where your team spends time on manual, repetitive work — and identify exactly where automation delivers the biggest impact.';
+// ── Hero ──────────────────────────────────────────────────────────────────────
 
-export const buildTheAutomation =
-  'We design and deploy custom n8n workflows, AI integrations, and CRM connections tailored to your business.';
+export const heroTitle = 'Let the busywork run itself.';
 
-export const youSaveTime =
-  'Your systems run on autopilot. Leads get followed up, appointments get booked, and your team focuses on what matters.';
+export const heroLead =
+  'We build websites and the automations behind them for small businesses in Southeastern Kentucky, set up once and running every day.';
 
-// ── What We Do ────────────────────────────────────────────────────────────────
+// ── Worked example (illustrative, labelled as such on the page) ───────────────
 
-export const workflowAutomation =
-  'We build custom n8n workflows that connect your tools, eliminate repetitive tasks, and keep your business running around the clock.';
+export interface ExampleStep {
+  time: string;
+  event: string;
+  detail: string;
+  outcome?: boolean;
+}
 
-export const aiApplications =
-  'From smart chatbots to intelligent document processing, we integrate AI into your operations so you can focus on growth.';
+export const exampleSteps: ExampleStep[] = [
+  { time: '4:55 PM', event: 'Missed call', detail: '(606) 555-0142, while you were on a roof' },
+  {
+    time: '4:55 PM',
+    event: 'Text sent automatically',
+    detail: '“Sorry we missed you! Reply with a good time and we’ll call you back.”',
+  },
+  { time: '4:58 PM', event: 'Customer replied', detail: '“Tomorrow morning works.”' },
+  {
+    time: '4:58 PM',
+    event: 'Booked',
+    detail: 'Thursday, 9:00 AM. On your calendar, in your CRM, reminder scheduled.',
+    outcome: true,
+  },
+];
 
-export const websiteCreation =
-  'Fast, modern websites built with purpose — designed to convert visitors and reflect your brand.';
+export const exampleCaption =
+  'An example of a missed-call text-back we set up. Times and messages are illustrative.';
 
-export const facebookAdsAndLeadFunnels =
-  'Targeted ad campaigns paired with optimized funnels that capture leads and route them directly into your CRM.';
+// ── Services, grouped by the outcome an owner cares about ────────────────────
 
-export const crmAndAutoTexting =
-  'Automatically follow up with every lead via text, keeping customers engaged and reducing churn without lifting a finger.';
+export interface Service {
+  name: string;
+  description: string;
+}
 
-export const brandingAndVisualIdentity =
-  'Logos, color palettes, and brand guidelines crafted by real creatives — built to make your business look as professional as it runs.';
+export interface ServiceGroup {
+  outcome: string;
+  summary: string;
+  services: Service[];
+}
 
-export const quickBooksAutomation =
-  'We automate your invoicing, payment reminders, and expense syncing so your books stay clean without you touching them.';
+export const serviceGroups: ServiceGroup[] = [
+  {
+    outcome: 'Get found and look the part',
+    summary: 'A place online that brings in work and looks as professional as you are.',
+    services: [
+      { name: 'Websites', description: 'Fast, clear sites built to turn visitors into calls.' },
+      { name: 'Branding', description: 'Logo, colors and simple brand guidelines, made by people, not templates.' },
+      { name: 'Facebook ads and lead funnels', description: 'Targeted ads that send new leads straight into your CRM.' },
+    ],
+  },
+  {
+    outcome: 'Never let a lead go cold',
+    summary: 'Every call, form and message gets an answer, even when you’re busy.',
+    services: [
+      { name: 'CRM and auto-texting', description: 'Follow up with every lead by text, automatically, until they book.' },
+      { name: 'Workflow automation', description: 'Custom n8n workflows that connect your tools and handle the repetitive steps.' },
+      { name: 'AI assistants', description: 'Chat and document tools that answer common questions and sort paperwork.' },
+    ],
+  },
+  {
+    outcome: 'Get paid and get reviewed',
+    summary: 'The end of the job takes care of itself.',
+    services: [
+      { name: 'QuickBooks automation', description: 'Invoices, payment reminders and expense syncing without the data entry.' },
+      { name: 'Reviews and reputation', description: 'Ask for a Google or Facebook review after every job and keep an eye on mentions.' },
+    ],
+  },
+];
 
-export const reputationAndReviewManagement =
-  'Automatically request Google and Facebook reviews after every job, monitor your mentions, and build the social proof that wins new customers.';
+// ── How it works ──────────────────────────────────────────────────────────────
+
+export interface Step {
+  title: string;
+  description: string;
+}
+
+export const steps: Step[] = [
+  {
+    title: 'We talk through your week',
+    description: 'On a free call we find the jobs that eat your time: chasing leads, booking, invoicing, reviews.',
+  },
+  {
+    title: 'We build it around your tools',
+    description: 'We connect what you already use, your phone, calendar, website and QuickBooks, and set up what’s missing.',
+  },
+  {
+    title: 'It runs, and you get the hours back',
+    description: 'Leads get a reply, appointments get booked, invoices go out. You get back to the work.',
+  },
+];
+
+export const sampleSites = {
+  title: 'See the kind of site we build',
+  lead: 'Seven sample sites for made-up local shops, salons and farms. Each one has its own look, and each one works on a phone first.',
+  linkLabel: 'Browse the sample sites',
+  href: '/samples/',
+  previews: ['auto-3', 'salon-2', 'farm-2', 'auto-2'],
+};

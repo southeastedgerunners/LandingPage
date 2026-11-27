@@ -1,5 +1,7 @@
 # Tally.so Form Setup
 
+> **Note (2026-11-23):** the lead pipeline is being rebuilt and the old n8n webhook flow has been removed. The webhook steps below describe the old setup and need updating once the new pipeline exists.
+
 This document specifies how to configure your Tally.so form so it sends the same data structure as the website's "Request a Call" modal.
 
 ## Field Spec
@@ -19,7 +21,7 @@ Create a new form at [tally.so](https://tally.so) with **exactly these fields**,
 ## Webhook Configuration
 
 1. In your Tally form, go to **Settings → Integrations → Webhooks**
-2. Add your n8n webhook URL (same URL as `VITE_N8N_WEBHOOK_URL`)
+2. Add the lead pipeline's webhook URL (to be decided in the rebuild)
 3. Set method to **POST**
 
 Tally will POST a payload like:

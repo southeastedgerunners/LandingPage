@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="50" height="76" viewBox="0 0 50 76">
+<defs><clipPath id="p0"><path d="M7 61C7 70 15 75 25 75C35 75 43 70 43 61L43 33C43 18 33 6 25 2C17 6 7 18 7 33Z" /></clipPath><linearGradient id="p1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5E8AA3" stop-opacity="0" /><stop offset="0.3" stop-color="#7FA9BF" stop-opacity="0.35" /><stop offset="0.5" stop-color="#DCEBF3" stop-opacity="0.85" /><stop offset="0.7" stop-color="#7FA9BF" stop-opacity="0.35" /><stop offset="1" stop-color="#5E8AA3" stop-opacity="0" /></linearGradient><filter id="p2" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2.6" /></filter></defs>
+<path d="M7 61C7 70 15 75 25 75C35 75 43 70 43 61L43 33C43 18 33 6 25 2C17 6 7 18 7 33Z" fill="#0E0E11" />
+<g clip-path="url(#p0)">
+<rect x="-15" y="22" width="80" height="32" transform="rotate(-32 25 38)" filter="url(#p2)" fill="url(#p1)" />
+</g>
+<path d="M7 61C7 70 15 75 25 75C35 75 43 70 43 61L43 33C43 18 33 6 25 2C17 6 7 18 7 33Z" fill="none" stroke="#00000080" />
+<path d="M12.5 60C11.5 47 12 31 17 18" fill="none" stroke="#FFFFFFBF" stroke-width="3" stroke-linecap="round" />
+<circle cx="13.5" cy="66" r="1.4" fill="#FFFFFFB3" />
+</svg>

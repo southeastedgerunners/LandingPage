@@ -1,0 +1,111 @@
+/* ── Dialog shell ── */
+.modal {
+  padding: 0;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  background: var(--color-elevated);
+  color: var(--color-text);
+  width: calc(100% - 2rem);
+  max-height: 90vh;
+  box-shadow: var(--shadow-modal);
+}
+
+/* Phones: the long intake form opens as a full-screen sheet rather than a box in a box. */
+.modal--wide {
+  width: 100%;
+  max-width: 100%;
+  height: 100dvh;
+  max-height: 100dvh;
+  border: none;
+  border-radius: 0;
+}
+
+.modal--slim {
+  max-width: 400px;
+}
+
+.modal::backdrop {
+  background: var(--color-scrim);
+}
+
+.modal[open] {
+  animation: modal-enter var(--duration-base) var(--ease-out);
+}
+
+.modal[open]::backdrop {
+  animation: modal-fade var(--duration-fast) var(--ease-out);
+}
+
+@keyframes modal-fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .modal[open] {
+    animation-name: modal-fade;
+  }
+}
+
+@keyframes modal-enter {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.modal__body {
+  position: relative;
+  padding: 1.5rem 1rem;
+}
+
+.modal__close {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  background: var(--color-wash);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-muted);
+  width: 2.75rem;
+  height: 2.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background var(--duration-fast) var(--ease-out), color var(--duration-fast) var(--ease-out);
+}
+
+.modal__close:hover,
+.modal__close:focus-visible {
+  background: var(--color-wash-strong);
+  color: var(--color-text);
+}
+
+.modal--wide .modal__close {
+  position: fixed;
+  background: var(--color-elevated);
+}
+
+.modal .lead-form__header h2,
+.modal .lead-form--success h2 {
+  padding-right: 2.75rem;
+}
+
+@media (min-width: 561px) {
+  .modal__body {
+    padding: 2rem;
+  }
+
+  .modal--wide {
+    width: calc(100% - 2rem);
+    max-width: 560px;
+    height: auto;
+    max-height: 90vh;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-card);
+  }
+
+  .modal--wide .modal__close {
+    position: absolute;
+    background: var(--color-wash);
+  }
+}

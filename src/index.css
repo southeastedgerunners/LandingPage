@@ -1,17 +1,72 @@
 :root {
   color-scheme: dark;
-  font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  line-height: 1.5;
+  font-family: var(--font-sans);
+  font-size: 100%;
+  line-height: var(--leading-body);
   font-weight: 400;
+  letter-spacing: 0.005em;
+  font-synthesis: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 
+  /* ── Type ──
+     One family, Archivo (self-hosted variable font, weight + width axes).
+     Headings run condensed like van lettering; body runs at normal width. */
+  --font-sans: 'Archivo Variable', 'Archivo', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --stretch-display: 78%;
+  --stretch-heading: 84%;
+  --text-display: clamp(2.875rem, 2rem + 3.6vw, 4.5rem);
+  --text-page-title: clamp(2.1rem, 1.5rem + 2.4vw, 3rem);
+  --text-heading: clamp(2.125rem, 1.75rem + 1vw, 2.5rem);
+  --text-subheading: 1.5rem;
+  --text-title: 1.25rem;
+  --text-lead: clamp(1.125rem, 1.05rem + 0.3vw, 1.25rem);
+  --text-body: 1.0625rem;
+  --text-small: 0.9375rem;
+  --text-label: 0.875rem;
+  --text-numeral: 3rem;
+  --leading-tight: 1.02;
+  --leading-heading: 1.1;
+  --leading-body: 1.6;
+  /* `ch` is the width of "0", wider than an average letter: 60ch holds about 72 characters. */
+  --measure: 60ch;
+
+  /* ── Palette (locked: see DESIGN.md, The Locked Palette Rule) ── */
   --color-background: #2b2b2b;
+  --color-elevated: #353535;
   --color-text: #e6e6e6;
   --color-muted: #b6b6b6;
   --color-accent: #00b5c9;
+  --color-accent-deep: #0078a0;
   --color-accent-alt: #ff2d8a;
-  --color-elevated: #353535;
+  --color-accent-alt-deep: #b4005a;
+  --color-error: #ff6b8a;
+
+  /* ── Roles derived from the palette ── */
+  --color-on-accent: var(--color-background);
   --color-border: rgba(255, 255, 255, 0.08);
-  --shadow-soft: 0 12px 30px rgba(0, 0, 0, 0.3);
+  --color-wash: rgba(255, 255, 255, 0.05);
+  --color-wash-strong: rgba(255, 255, 255, 0.12);
+  --color-scrim: rgba(0, 0, 0, 0.72);
+  --color-accent-wash: color-mix(in srgb, var(--color-accent) 15%, transparent);
+  --color-placeholder: color-mix(in srgb, var(--color-muted) 92%, var(--color-elevated));
+  --color-field-border: color-mix(in srgb, var(--color-muted) 60%, var(--color-elevated));
+
+  /* ── Shape ── */
+  /* Small, firm corners to sit with the logo's cut geometry. */
+  --radius-check: 2px;
+  --radius-sm: 4px;
+  --radius-field: 6px;
+  --radius-control: 6px;
+  --radius-card: 10px;
+
+  /* ── Depth ── */
+  --shadow-modal: 0 24px 60px rgba(0, 0, 0, 0.5);
+
+  /* ── Motion ── */
+  --duration-fast: 150ms;
+  --duration-base: 180ms;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 *,
@@ -27,56 +82,146 @@ body {
   color: var(--color-text);
 }
 
+/* Lock page scroll while a modal dialog is open. */
+body:has(dialog[open]) {
+  overflow: hidden;
+}
+
 a {
   color: inherit;
   text-decoration: none;
 }
 
-button {
-  font-family: inherit;
+button,
+input,
+textarea,
+select {
+  font: inherit;
+  letter-spacing: inherit;
 }
 
-/* ── Shared button ── */
+/* ── Type roles ── */
+h1,
+h2,
+h3 {
+  margin: 0;
+  color: var(--color-text);
+  text-wrap: balance;
+}
+
+h1,
+h2 {
+  font-stretch: var(--stretch-heading);
+  font-weight: 760;
+  line-height: var(--leading-heading);
+  letter-spacing: -0.01em;
+}
+
+h1 {
+  font-size: var(--text-page-title);
+}
+
+h2 {
+  font-size: var(--text-heading);
+}
+
+h3 {
+  font-size: var(--text-title);
+  font-weight: 650;
+  line-height: 1.25;
+}
+
+p,
+li,
+dd {
+  text-wrap: pretty;
+}
+
+input,
+textarea {
+  caret-color: var(--color-accent);
+}
+
+::selection {
+  background: var(--color-accent);
+  color: var(--color-background);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+/* ── Shared button: solid Edge Cyan, charcoal label (5.7:1). No gradient, no glow. ── */
 .cta-button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  min-height: 2.75rem;
   appearance: none;
   border: none;
-  border-radius: 12px;
-  background: linear-gradient(135deg, rgba(0, 181, 201, 0.9), rgba(0, 120, 160, 0.9));
-  color: #ffffff;
-  padding: 0.75rem 1.75rem;
-  font-size: 0.95rem;
-  font-weight: 600;
-  letter-spacing: 0.03em;
+  border-radius: var(--radius-control);
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+  padding: 0.75rem 1.5rem;
+  font-size: var(--text-small);
+  font-weight: 650;
+  letter-spacing: 0.01em;
   cursor: pointer;
   text-decoration: none;
-  box-shadow: 0 14px 28px rgba(0, 181, 201, 0.25);
-  transition: transform 150ms ease, box-shadow 150ms ease;
+  transition: filter var(--duration-fast) var(--ease-out), background var(--duration-fast) var(--ease-out);
 }
 
-.cta-button:hover,
-.cta-button:focus-visible {
-  transform: translateY(-2px);
-  box-shadow: 0 16px 32px rgba(0, 181, 201, 0.32);
+.cta-button:hover {
+  filter: brightness(1.1);
+}
+
+.cta-button:active {
+  filter: brightness(0.92);
+}
+
+.cta-button[aria-disabled='true'] {
+  cursor: progress;
+  filter: none;
+  opacity: 0.75;
 }
 
 .cta-button:disabled {
-  opacity: 1;
   cursor: not-allowed;
-  transform: none;
-  box-shadow: none;
-  background: rgba(100, 100, 100, 0.4);
-  color: rgba(255, 255, 255, 0.35);
+  filter: none;
+  background: var(--color-wash-strong);
+  color: var(--color-muted);
 }
 
-.cta-button--pink {
-  background: linear-gradient(135deg, rgba(255, 45, 138, 0.9), rgba(180, 0, 90, 0.9));
-  box-shadow: 0 14px 28px rgba(255, 45, 138, 0.25);
+.cta-button--compact {
+  min-height: 2.75rem;
+  padding: 0.5rem 1rem;
+  font-size: var(--text-label);
+  white-space: nowrap;
 }
 
-.cta-button--pink:hover,
-.cta-button--pink:focus-visible {
-  box-shadow: 0 16px 32px rgba(255, 45, 138, 0.38);
+/* ── Links ── */
+.inline-link,
+.text-link {
+  color: var(--color-accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.inline-link:hover,
+.text-link:hover {
+  color: var(--color-text);
+}
+
+/* A button that reads as a text link (opens a dialog rather than navigating). */
+.text-link {
+  appearance: none;
+  background: none;
+  border: none;
+  /* Grow the hit area to 44px tall without moving the text. */
+  padding: 0.7rem 0;
+  margin: -0.7rem 0;
+  font: inherit;
+  cursor: pointer;
 }

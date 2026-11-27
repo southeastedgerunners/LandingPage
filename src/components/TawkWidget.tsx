@@ -1,44 +1,10 @@
-import { useState, useEffect } from 'react';
-import './TawkWidget.css';
-
+// TODO(live-chat): Tawk.to live chat is switched off. It could not be tested here
+// (the sandbox blocked Tawk's script), so it needs testing in a real browser before
+// it goes live. This placeholder loads no script and renders no chat controls.
+// The original integration is in src/components/disabled/TawkWidget.disabled.tsx;
+// see the note at the top of that file for how to restore it.
 function TawkWidget() {
-  const [hidden, setHidden] = useState(() => sessionStorage.getItem('tawk-hidden') === 'true');
-
-  useEffect(() => {
-    const api = window.Tawk_API;
-    if (!api) return;
-
-    if (hidden) {
-      api.hideWidget?.();
-    } else {
-      api.showWidget?.();
-    }
-    sessionStorage.setItem('tawk-hidden', String(hidden));
-  }, [hidden]);
-
-  if (hidden) {
-    return (
-      <button
-        className="tawk-restore"
-        onClick={() => setHidden(false)}
-        aria-label="Show chat"
-        title="Show chat"
-      >
-        💬
-      </button>
-    );
-  }
-
-  return (
-    <button
-      className="tawk-dismiss"
-      onClick={() => setHidden(true)}
-      aria-label="Hide chat widget"
-      title="Hide chat"
-    >
-      ✕ Hide chat
-    </button>
-  );
+  return null;
 }
 
 export default TawkWidget;

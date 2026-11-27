@@ -1,0 +1,285 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-23T09:15:00-05:00",
+  "title": "Design System: SouthEast EdgeRunners",
+  "extensions": {
+    "colorMeta": {
+      "edge-cyan": {
+        "role": "primary",
+        "displayName": "Edge Cyan",
+        "canonical": "#00b5c9",
+        "tonalRamp": [
+          "#00262b",
+          "#003c44",
+          "#00555f",
+          "#00707c",
+          "#008d9b",
+          "#00b5c9",
+          "#7fd8e2",
+          "#d2f2f6"
+        ]
+      },
+      "edge-cyan-deep": {
+        "role": "primary",
+        "displayName": "Edge Cyan Deep",
+        "canonical": "#0078a0"
+      },
+      "runner-pink": {
+        "role": "secondary",
+        "displayName": "Runner Pink",
+        "canonical": "#ff2d8a",
+        "tonalRamp": [
+          "#33091b",
+          "#55102e",
+          "#7d1745",
+          "#a81f5d",
+          "#d62675",
+          "#ff2d8a",
+          "#ff8fbd",
+          "#ffd9ea"
+        ]
+      },
+      "runner-pink-deep": {
+        "role": "secondary",
+        "displayName": "Runner Pink Deep",
+        "canonical": "#b4005a"
+      },
+      "shop-charcoal": {
+        "role": "neutral",
+        "displayName": "Shop Charcoal",
+        "canonical": "#2b2b2b",
+        "tonalRamp": [
+          "#141414",
+          "#1f1f1f",
+          "#2b2b2b",
+          "#353535",
+          "#4a4a4a",
+          "#7a7a7a",
+          "#b6b6b6",
+          "#e6e6e6"
+        ]
+      },
+      "raised-charcoal": {
+        "role": "neutral",
+        "displayName": "Raised Charcoal",
+        "canonical": "#353535"
+      },
+      "chalk": {
+        "role": "neutral",
+        "displayName": "Chalk",
+        "canonical": "#e6e6e6"
+      },
+      "ash": {
+        "role": "neutral",
+        "displayName": "Ash",
+        "canonical": "#b6b6b6"
+      },
+      "hairline": {
+        "role": "neutral",
+        "displayName": "Hairline",
+        "canonical": "rgba(255, 255, 255, 0.08)"
+      },
+      "wash": {
+        "role": "neutral",
+        "displayName": "Wash",
+        "canonical": "rgba(255, 255, 255, 0.05)"
+      },
+      "wash-strong": {
+        "role": "neutral",
+        "displayName": "Wash Strong",
+        "canonical": "rgba(255, 255, 255, 0.12)"
+      },
+      "scrim": {
+        "role": "neutral",
+        "displayName": "Scrim",
+        "canonical": "rgba(0, 0, 0, 0.72)"
+      },
+      "error-rose": {
+        "role": "error",
+        "displayName": "Error Rose",
+        "canonical": "#ff6b8a"
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Homepage headline only."
+      },
+      "page-title": {
+        "displayName": "Page Title",
+        "purpose": "h1 on inner pages."
+      },
+      "heading": {
+        "displayName": "Heading",
+        "purpose": "Section headings."
+      },
+      "subheading": {
+        "displayName": "Subheading",
+        "purpose": "Service groups, legal sections, form titles."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Process step headings."
+      },
+      "lead": {
+        "displayName": "Lead",
+        "purpose": "Paragraph under a major heading."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Prose, capped at 65ch."
+      },
+      "small": {
+        "displayName": "Small",
+        "purpose": "Supporting text."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Form labels, captions, times."
+      },
+      "numeral": {
+        "displayName": "Numeral",
+        "purpose": "Process step numbers, cyan."
+      }
+    },
+    "shadows": [
+      {
+        "name": "modal",
+        "value": "0 24px 60px rgba(0, 0, 0, 0.5)",
+        "purpose": "Under dialogs only."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-out",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "All transitions and entrances."
+      },
+      {
+        "name": "state",
+        "value": "150ms",
+        "purpose": "Hover, focus and color changes."
+      },
+      {
+        "name": "dialog",
+        "value": "180ms rise of 12px with fade; fade only under reduced motion",
+        "purpose": "Dialog entrance."
+      },
+      {
+        "name": "example-log",
+        "value": "480ms per line, 520ms apart, starting at 350ms; none under reduced motion",
+        "purpose": "The homepage worked example plays in once."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "lg",
+        "value": "900px"
+      },
+      {
+        "name": "md",
+        "value": "720px"
+      },
+      {
+        "name": "sm",
+        "value": "560px"
+      },
+      {
+        "name": "xs",
+        "value": "360px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The main action on every screen (Request a Call).",
+      "html": "<button class=\"ds-btn\">Request a Call</button>",
+      "css": ".ds-btn { display: inline-flex; align-items: center; justify-content: center; min-height: 2.75rem; border: none; border-radius: 6px; background: var(--color-accent, #00b5c9); color: var(--color-background, #2b2b2b); padding: 0.75rem 1.5rem; font-size: 0.9375rem; font-weight: 650; letter-spacing: 0.01em; cursor: pointer; transition: filter 150ms cubic-bezier(0.16,1,0.3,1); } .ds-btn:hover { filter: brightness(1.1); } .ds-btn:active { filter: brightness(0.92); } .ds-btn:focus-visible { outline: 2px solid #00b5c9; outline-offset: 3px; } .ds-btn:disabled { background: rgba(255,255,255,0.12); color: #b6b6b6; cursor: not-allowed; filter: none; }"
+    },
+    {
+      "name": "Text Link Button",
+      "kind": "button",
+      "refersTo": "text-link",
+      "description": "Secondary action that opens a dialog (the intake form).",
+      "html": "<button class=\"ds-text-link\">Fill out the intake form</button>",
+      "css": ".ds-text-link { appearance: none; background: none; border: none; padding: 0; font: inherit; color: #00b5c9; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; cursor: pointer; } .ds-text-link:hover { color: #e6e6e6; } .ds-text-link:focus-visible { outline: 2px solid #00b5c9; outline-offset: 3px; }"
+    },
+    {
+      "name": "Text Input",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Form field in the lead forms.",
+      "html": "<label class=\"ds-field\"><span>Your Name</span><input class=\"ds-input\" placeholder=\"e.g. John Smith\"></label>",
+      "css": ".ds-field { display: flex; flex-direction: column; gap: 0.35rem; } .ds-field span { font-size: 0.875rem; font-weight: 500; color: #b6b6b6; letter-spacing: 0.02em; } .ds-input { background: rgba(255,255,255,0.05); border: 1px solid color-mix(in srgb, #b6b6b6 60%, #353535); border-radius: 6px; color: #e6e6e6; font: inherit; font-size: 1rem; padding: 0.65rem 0.85rem; outline: none; } .ds-input::placeholder { color: color-mix(in srgb, #b6b6b6 92%, #353535); } .ds-input:focus { border-color: #00b5c9; box-shadow: 0 0 0 3px color-mix(in srgb, #00b5c9 15%, transparent); }"
+    },
+    {
+      "name": "Raised Panel",
+      "kind": "card",
+      "refersTo": "panel",
+      "description": "The one raised surface on a screen.",
+      "html": "<div class=\"ds-panel\"><h3>Tell us what's eating your week.</h3><p>One short call is enough to find the first thing worth automating.</p></div>",
+      "css": ".ds-panel { background: #353535; border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 1.5rem; } .ds-panel h3 { margin: 0 0 0.5rem; font-size: 1.5rem; font-stretch: 84%; font-weight: 760; color: #e6e6e6; } .ds-panel p { margin: 0; color: #b6b6b6; }"
+    },
+    {
+      "name": "Worked Example Log",
+      "kind": "custom",
+      "description": "Timestamped log of one automation; the outcome takes the screen's single pink marker.",
+      "html": "<ol class=\"ds-log\"><li><time>4:55 PM</time><b>Missed call</b><span>(606) 555-0142</span></li><li class=\"ds-log--out\"><time>4:58 PM</time><b>Booked</b><span>Thursday, 9:00 AM</span></li></ol>",
+      "css": ".ds-log { list-style: none; margin: 0; padding: 1.25rem; background: #353535; border-radius: 10px; } .ds-log li { position: relative; display: grid; grid-template-columns: 4.75rem 1fr; column-gap: 1rem; padding: 0 0 1rem 1.25rem; } .ds-log li::after { content: ''; position: absolute; left: 0; top: 0.4rem; width: 0.55rem; height: 0.55rem; background: #00b5c9; } .ds-log li.ds-log--out::after { background: #ff2d8a; } .ds-log time { grid-row: 1 / 3; font-size: 0.875rem; color: #b6b6b6; font-variant-numeric: tabular-nums; } .ds-log b { font-weight: 650; color: #e6e6e6; } .ds-log span { font-size: 0.9375rem; color: #b6b6b6; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "Night Shift Workshop",
+    "overview": "A local shop that keeps a small business running after hours. The room is dark charcoal, and the light comes from the work itself: Edge Cyan, the color of the logo, is the working signal, and Runner Pink is the occasional spark. The tone is practical and capable rather than flashy, the way a good tradesperson's van is clean and clearly lettered rather than chromed.",
+    "keyCharacteristics": [
+      "Dark-only theme on Shop Charcoal (#2b2b2b).",
+      "One type family, Archivo, condensed for headings and normal width for reading.",
+      "Edge Cyan leads; Runner Pink appears once per screen at most.",
+      "Small, firm corners (2–10px) that sit with the angular \"ER\" logo.",
+      "No glows, no gradients, no decorative cards."
+    ],
+    "rules": [
+      {
+        "name": "The Locked Palette Rule",
+        "body": "The hex values above are fixed by the owner. Fixes change where and how much a color is used, never the values. New colors may be proposed as optional additions, never as replacements.",
+        "section": "colors"
+      },
+      {
+        "name": "The Cyan Leads Rule",
+        "body": "Edge Cyan is the lead accent because it is the logo. Runner Pink is rare: at most one pink moment per screen, used for the thing that most deserves a second look.",
+        "section": "colors"
+      },
+      {
+        "name": "The No Glow Rule",
+        "body": "No colored shadows, drop-shadow halos or gradient fills. Depth comes from Raised Charcoal and hairlines; the only shadow is the neutral one under dialogs.",
+        "section": "elevation"
+      },
+      {
+        "name": "The One Family Rule",
+        "body": "Archivo only. Hierarchy comes from width, weight and size together, never from a second face.",
+        "section": "typography"
+      },
+      {
+        "name": "The Measure Rule",
+        "body": "Running text stops at 65ch; headings use text-wrap: balance, paragraphs text-wrap: pretty.",
+        "section": "typography"
+      }
+    ],
+    "dos": [
+      "Do keep every palette value exactly as listed in the frontmatter (The Locked Palette Rule).",
+      "Do use solid Edge Cyan with Shop Charcoal text for the primary action.",
+      "Do group with space and hairlines before reaching for a panel.",
+      "Do label any illustrative example as illustrative."
+    ],
+    "donts": [
+      "Don't swap, re-hue, or replace the brand colors.",
+      "Don't use Runner Pink for small text, links or labels.",
+      "Don't add glows, gradient fills, colored shadows or side-stripe borders (The No Glow Rule).",
+      "Don't show invented numbers, testimonials or client logos.",
+      "Don't put white text on Edge Cyan (2.5:1)."
+    ]
+  }
+}

@@ -1,0 +1,70 @@
+import { afterEach, describe, expect, it, vi } from 'vitest';
+import { cleanup, fireEvent, render, screen } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
+import App from './App';
+
+function renderAt(path: string) {
+  render(
+    <MemoryRouter initialEntries={[path]}>
+      <App />
+    </MemoryRouter>,
+  );
+}
+
+afterEach(() => {
+  cleanup();
+  vi.unstubAllGlobals();
+});
+
+describe('routes', () => {
+  it('shows a not-found page for removed or unknown paths', () => {
+    renderAt('/estimator');
+    expect(screen.getByRole('heading', { level: 1, name: 'We couldn’t find that page' })).toBeTruthy();
+    expect(document.title).toBe('Page not found · SouthEast EdgeRunners');
+  });
+
+  it('offers the homepage and a call request from the not-found page', () => {
+    renderAt('/estimator');
+    expect(screen.getByRole('link', { name: 'Go to the homepage' }).getAttribute('href')).toBe('/');
+    fireEvent.click(screen.getByRole('button', { name: 'Or request a call' }));
+    expect(screen.getByRole('dialog')).toBeTruthy();
+  });
+
+  it('gives each page its own title', () => {
+    renderAt('/privacy');
+    expect(document.title).toBe('Privacy Policy · SouthEast EdgeRunners');
+  });
+
+  it('keeps the legal links in the footer', () => {
+    renderAt('/');
+    const legal = screen.getByRole('navigation', { name: 'Legal' });
+    expect(legal.querySelector('a[href="/privacy"]')).toBeTruthy();
+    expect(legal.querySelector('a[href="/terms"]')).toBeTruthy();
+  });
+
+  it('starts a new page at the top with focus on the main content', () => {
+    const scrollTo = vi.fn();
+    vi.stubGlobal('scrollTo', scrollTo);
+    renderAt('/');
+    fireEvent.click(screen.getByRole('link', { name: 'Privacy Policy' }));
+    expect(scrollTo).toHaveBeenCalledWith(0, 0);
+    expect(document.activeElement?.id).toBe('main');
+  });
+
+  it('sets a description for each page', () => {
+    document.head.innerHTML = '<meta name="description" content="">';
+    renderAt('/terms');
+    expect(document.querySelector('meta[name="description"]')?.getAttribute('content')).toMatch(/^Terms for SMS/);
+  });
+
+  it('shows the owner-content placeholders on the homepage instead of invented content', () => {
+    renderAt('/');
+    for (const text of [
+      '[PLACEHOLDER: business phone number]',
+      '[PLACEHOLDER: pricing: how projects are priced and any monthly costs]',
+    ]) {
+      expect(screen.getByText(text)).toBeTruthy();
+    }
+    expect(screen.getByRole('img', { name: /placeholder for a photo/i })).toBeTruthy();
+  });
+});

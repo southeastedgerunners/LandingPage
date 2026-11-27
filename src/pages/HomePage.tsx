@@ -1,161 +1,229 @@
-import { useState, useEffect, useRef } from 'react';
-import logo from '../assets/SouthEasternEdgeRunners.png';
-import CallRequestModal from '../components/CallRequestModal';
-import IntakeFormModal from '../components/IntakeFormModal';
+import { useLayoutEffect, useRef, useState } from 'react';
+import Modal from '../components/Modal';
+import IntakeForm from '../components/IntakeForm';
+import { useCallRequest } from '../components/CallRequestContext';
+import Placeholder from '../components/Placeholder';
+import EmailLink from '../components/EmailLink';
+import { contactRegion } from '../components/PhoneCallBar';
 import {
-  auditYourWorkflow,
-  buildTheAutomation,
-  youSaveTime,
-  workflowAutomation,
-  aiApplications,
-  websiteCreation,
-  facebookAdsAndLeadFunnels,
-  crmAndAutoTexting,
-  brandingAndVisualIdentity,
-  quickBooksAutomation,
-  reputationAndReviewManagement,
+  heroTitle,
+  heroLead,
+  exampleSteps,
+  exampleCaption,
+  serviceGroups,
+  steps,
+  sampleSites,
 } from '../content/homePage';
+import { FOUNDER_NAME, RESPONSE_PROMISE, SERVICE_AREA } from '../lib/contact';
 import './HomePage.css';
+import { usePageTitle } from '../lib/usePageTitle';
 
-const services = [
-  { title: 'Workflow Automation',            description: workflowAutomation },
-  { title: 'AI Applications',               description: aiApplications },
-  { title: 'Website Creation',              description: websiteCreation },
-  { title: 'Facebook Ads & Lead Funnels',   description: facebookAdsAndLeadFunnels },
-  { title: 'CRM & Auto-Texting',            description: crmAndAutoTexting },
-  { title: 'Branding & Visual Identity',    description: brandingAndVisualIdentity },
-  { title: 'QuickBooks Automation',         description: quickBooksAutomation },
-  { title: 'Reputation & Review Management', description: reputationAndReviewManagement },
-];
+/**
+ * Holds the worked example's log back until half of it is on screen, then plays it once.
+ * Without IntersectionObserver the state stays undefined and the log shows complete.
+ */
+function useExampleLog() {
+  const ref = useRef<HTMLElement>(null);
+  const [state, setState] = useState<'waiting' | 'playing'>();
 
-const stats = [
-  { value: 50,  suffix: '+', label: 'Workflows Automated' },
-  { value: 200, suffix: '+', label: 'Hours Saved Monthly' },
-  { value: 100, suffix: '%', label: 'Client Retention' },
-  { value: 5,   suffix: 'x', label: 'Average ROI' },
-];
-
-const steps = [
-  { title: 'Audit Your Workflow', description: auditYourWorkflow },
-  { title: 'Build the Automation', description: buildTheAutomation },
-  { title: 'You Save Time',        description: youSaveTime },
-];
-
-function useCountUp(target: number, isActive: boolean, duration = 1200) {
-  const [count, setCount] = useState(0);
-
-  useEffect(() => {
-    if (!isActive) return;
-    let start: number | null = null;
-    const step = (timestamp: number) => {
-      if (!start) start = timestamp;
-      const progress = Math.min((timestamp - start) / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      setCount(Math.floor(eased * target));
-      if (progress < 1) requestAnimationFrame(step);
-    };
-    const id = requestAnimationFrame(step);
-    return () => cancelAnimationFrame(id);
-  }, [isActive, target, duration]);
-
-  return count;
-}
-
-function StatCard({ value, suffix, label }: { value: number; suffix: string; label: string }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [active, setActive] = useState(false);
-  const count = useCountUp(value, active);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
+  useLayoutEffect(() => {
+    const figure = ref.current;
+    if (!figure || typeof IntersectionObserver === 'undefined') return;
+    setState('waiting');
+    // The first callback fires whatever the overlap, so check the ratio, not just isIntersecting.
     const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setActive(true); },
+      ([entry]) => {
+        if (entry.intersectionRatio < 0.5) return;
+        setState('playing');
+        observer.disconnect();
+      },
       { threshold: 0.5 },
     );
-    observer.observe(el);
+    observer.observe(figure);
     return () => observer.disconnect();
   }, []);
 
-  return (
-    <div className="stat-card" ref={ref}>
-      <span className="stat-card__value">{count}{suffix}</span>
-      <span className="stat-card__label">{label}</span>
-    </div>
-  );
+  return { ref, state };
 }
 
 function HomePage() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  usePageTitle();
+  const openCallRequest = useCallRequest();
   const [isIntakeOpen, setIsIntakeOpen] = useState(false);
+  const [intakeKey, setIntakeKey] = useState(0);
+  const exampleLog = useExampleLog();
+
+  const intakeLink = (label: string) => (
+    <button type="button" className="text-link" onClick={() => setIsIntakeOpen(true)}>
+      {label}
+    </button>
+  );
 
   return (
     <>
       <div className="home">
-        <section className="hero">
-          <div className="hero__content">
-            <h1>
-              Automate your business.<br />
-              <span className="hero__accent">Grow faster.</span>
-            </h1>
-            <p className="hero__sub">
-              SouthEast EdgeRunners helps businesses automate the work they shouldn't be doing
-              manually — from lead capture to customer retention.
-            </p>
-            <div className="hero__cta">
-              <button type="button" className="cta-button" onClick={() => setIsModalOpen(true)}>
+        <section className="hero" aria-labelledby="hero-title">
+          <div className="hero__copy">
+            <h1 id="hero-title" className="hero__title">{heroTitle}</h1>
+            <p className="hero__lead">{heroLead}</p>
+            <div className="hero__actions" {...contactRegion}>
+              <button type="button" className="cta-button" onClick={openCallRequest}>
                 Request a Call
               </button>
-              <button type="button" className="cta-button cta-button--pink" onClick={() => setIsIntakeOpen(true)}>
-                Free Intake Form →
-              </button>
+              <p className="hero__note">
+                Free intake. We reply {RESPONSE_PROMISE}.
+                <br />
+                Prefer to write it out? {intakeLink('Fill out the intake form')}.
+              </p>
             </div>
           </div>
-          <div className="hero__visual">
-            <img src={logo} alt="SouthEast EdgeRunners" className="hero__logo" />
-          </div>
+
+          <figure className="example" aria-labelledby="example-caption" ref={exampleLog.ref} data-log={exampleLog.state}>
+            <ol className="example__log">
+              {exampleSteps.map((step, i) => (
+                <li
+                  key={step.event}
+                  className={step.outcome ? 'example__step example__step--outcome' : 'example__step'}
+                  style={{ '--step': i } as React.CSSProperties}
+                >
+                  <time className="example__time">{step.time}</time>
+                  <span className="example__event">{step.event}</span>
+                  <span className="example__detail">{step.detail}</span>
+                </li>
+              ))}
+            </ol>
+            <figcaption id="example-caption" className="example__caption">{exampleCaption}</figcaption>
+          </figure>
         </section>
 
-        <section className="stats" aria-label="Key metrics">
-          <h2>By the Numbers</h2>
-          <div className="stats__grid">
-            {stats.map(s => (
-              <StatCard key={s.label} value={s.value} suffix={s.suffix} label={s.label} />
-            ))}
-          </div>
-        </section>
-
-        <section className="how-it-works">
-          <h2>How It Works</h2>
-          <div className="how-it-works__steps">
-            {steps.map((step, i) => (
-              <article key={step.title} className="step-card">
-                <div className="step-card__badge" aria-hidden="true">{i + 1}</div>
-                <h3 className="step-card__title">{step.title}</h3>
-                <p className="step-card__desc">{step.description}</p>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section className="services">
-          <h2>What We Do</h2>
-          <div className="services__grid">
-            {services.map((s) => (
-              <article key={s.title} className="service-card">
-                <div className="service-card__accent" aria-hidden="true" />
-                <div className="service-card__body">
-                  <h3>{s.title}</h3>
-                  <p>{s.description}</p>
+        <section className="services" aria-labelledby="services-title">
+          <h2 id="services-title">What we can take off your plate</h2>
+          <div className="services__groups">
+            {serviceGroups.map(group => (
+              <section key={group.outcome} className="service-group" aria-label={group.outcome}>
+                <div className="service-group__intro">
+                  <h3>{group.outcome}</h3>
+                  <p>{group.summary}</p>
                 </div>
-              </article>
+                <dl className="service-group__list">
+                  {group.services.map(service => (
+                    <div key={service.name} className="service">
+                      <dt>{service.name}</dt>
+                      <dd>{service.description}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </section>
             ))}
+          </div>
+        </section>
+
+        <section className="process" aria-labelledby="process-title">
+          <h2 id="process-title">From first call to running on its own</h2>
+          <ol className="process__steps">
+            {steps.map(step => (
+              <li key={step.title} className="process__step">
+                <h3>{step.title}</h3>
+                <p>{step.description}</p>
+              </li>
+            ))}
+          </ol>
+        </section>
+
+        {/* The samples are static pages in public/samples, so these are plain links that leave the app router. */}
+        <section className="samples" aria-labelledby="samples-title">
+          <div className="samples__intro">
+            <h2 id="samples-title">{sampleSites.title}</h2>
+            <p>{sampleSites.lead}</p>
+            <a className="inline-link samples__link" href={sampleSites.href}>{sampleSites.linkLabel}</a>
+          </div>
+          <a className="samples__strip" href={sampleSites.href} tabIndex={-1} aria-hidden="true">
+            {sampleSites.previews.map(slug => (
+              <img key={slug} src={`${sampleSites.href}img/${slug}-thumb.webp`} alt="" width={260} height={532} loading="lazy" decoding="async" />
+            ))}
+          </a>
+        </section>
+
+        <section className="about" aria-labelledby="about-title">
+          <div className="about__intro">
+            <h2 id="about-title">Local, and easy to reach</h2>
+            {/* TODO(content): replace with a real photo of the founder. See PLACEHOLDERS.md. */}
+            <div className="about__photo" role="img" aria-label={`Placeholder for a photo of ${FOUNDER_NAME}`}>
+              <Placeholder>photo of {FOUNDER_NAME}</Placeholder>
+            </div>
+          </div>
+          <div className="about__body">
+            <div className="about__text">
+              <p>
+                SouthEast EdgeRunners is run by {FOUNDER_NAME}, working with small businesses across{' '}
+                {SERVICE_AREA}.
+              </p>
+              {/* TODO(content): first-person intro from the founder. See PLACEHOLDERS.md. */}
+              <Placeholder block>2–3 first-person sentences from {FOUNDER_NAME}: who you are and why you work locally</Placeholder>
+            </div>
+            <dl className="about__facts">
+              <div>
+                <dt>Phone</dt>
+                {/* TODO(content): business phone number. See PLACEHOLDERS.md. */}
+                <dd><Placeholder>business phone number</Placeholder></dd>
+              </div>
+              <div>
+                <dt>Email</dt>
+                <dd><EmailLink className="inline-link" /></dd>
+              </div>
+              <div>
+                <dt>Reply time</dt>
+                <dd>Every inquiry, {RESPONSE_PROMISE}</dd>
+              </div>
+              <div>
+                <dt>Service area</dt>
+                <dd>{SERVICE_AREA}</dd>
+              </div>
+            </dl>
+          </div>
+        </section>
+
+        <section className="questions" aria-labelledby="questions-title">
+          <h2 id="questions-title">Before you call</h2>
+          <dl className="questions__list">
+            <div className="question">
+              <dt>What does it cost?</dt>
+              {/* TODO(content): honest pricing information from the owner. See PLACEHOLDERS.md. */}
+              <dd><Placeholder block>pricing: how projects are priced and any monthly costs</Placeholder></dd>
+            </div>
+            <div className="question">
+              <dt>What happens on the call?</dt>
+              {/* TODO(content): what the first call covers. See PLACEHOLDERS.md. */}
+              <dd><Placeholder block>what happens on the first call, how long it takes, and what comes after</Placeholder></dd>
+            </div>
+          </dl>
+        </section>
+
+        <section className="closing" aria-labelledby="closing-title" {...contactRegion}>
+          <h2 id="closing-title">Tell us what’s eating your week.</h2>
+          <p>One short call is enough to find the first thing worth automating.</p>
+          <div className="closing__actions">
+            <button type="button" className="cta-button" onClick={openCallRequest}>
+              Request a Call
+            </button>
+            <p className="closing__alt">
+              Or {intakeLink('fill out the intake form')}, or email{' '}
+              <EmailLink className="inline-link" />.
+            </p>
           </div>
         </section>
       </div>
 
-      <CallRequestModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
-      <IntakeFormModal isOpen={isIntakeOpen} onClose={() => setIsIntakeOpen(false)} />
+      <Modal isOpen={isIntakeOpen} onClose={() => setIsIntakeOpen(false)} labelledBy="intake-title">
+        <IntakeForm
+          key={intakeKey}
+          headingId="intake-title"
+          onDone={() => {
+            setIsIntakeOpen(false);
+            setIntakeKey(k => k + 1);
+          }}
+        />
+      </Modal>
     </>
   );
 }

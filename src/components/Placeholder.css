@@ -1,0 +1,19 @@
+/* Obvious on purpose, but sized like the text it stands in for so layouts hold. */
+.placeholder {
+  color: var(--color-muted);
+  background: var(--color-wash);
+  outline: 1px dashed var(--color-field-border);
+  outline-offset: 1px;
+  border-radius: var(--radius-sm);
+  padding: 0 0.25rem;
+  font-style: italic;
+  /* Keep the box on every line when an inline placeholder wraps. */
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+.placeholder--block {
+  display: block;
+  margin: 0;
+  padding: 0.6rem 0.75rem;
+}

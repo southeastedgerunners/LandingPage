@@ -1,0 +1,51 @@
+.tawk-dismiss,
+.tawk-restore {
+  position: fixed;
+  right: 0.75rem;
+  z-index: 999;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  background: var(--color-elevated);
+  border: 1px solid var(--color-field-border);
+  color: var(--color-muted);
+  cursor: pointer;
+  transition: color var(--duration-fast) var(--ease-out), border-color var(--duration-fast) var(--ease-out);
+}
+
+.tawk-dismiss:hover,
+.tawk-restore:hover {
+  color: var(--color-text);
+  border-color: var(--color-muted);
+}
+
+/* Sits just above the Tawk launcher bubble. */
+.tawk-dismiss {
+  bottom: 5.25rem;
+  padding: 0 0.9rem;
+  border-radius: var(--radius-control);
+  font-size: var(--text-label);
+  white-space: nowrap;
+}
+
+.tawk-restore {
+  bottom: 0.75rem;
+  border-radius: 50%;
+}
+
+@media (min-width: 561px) {
+  .tawk-dismiss,
+  .tawk-restore {
+    right: 1.25rem;
+  }
+
+  .tawk-dismiss {
+    bottom: 5.75rem;
+  }
+
+  .tawk-restore {
+    bottom: 1.25rem;
+  }
+}

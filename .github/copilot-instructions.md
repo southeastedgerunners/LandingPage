@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-This repository is the SouthEast EdgeRunners marketing site for a business automation company. The app is a React + TypeScript + Vite frontend deployed to Netlify — there is no backend. All lead capture flows directly to n8n via webhook.
+This repository is the SouthEast EdgeRunners marketing site for a business automation company. The app is a React + TypeScript + Vite frontend deployed to Netlify. Lead capture goes through a Netlify function that is currently a placeholder (see Lead capture below).
 
 The homepage messaging should stay aligned with the business described in `instructions.md`: workflow automation with n8n, AI applications, website creation, Facebook ads, CRM lead routing, and automated text follow-up.
 
@@ -16,7 +16,7 @@ npm run preview
 
 - `npm run build` runs TypeScript type-checking via `tsc` and then creates the production bundle with Vite.
 - `npm start` is an alias for `vite preview --port $PORT` used in deployment environments (e.g., Netlify).
-- There is currently no test runner configured and no lint script in `package.json`.
+- `npm test` runs the Vitest suite (jsdom + Testing Library). There is no lint script.
 
 ## High-Level Architecture
 
@@ -24,37 +24,18 @@ npm run preview
 - `src/App.tsx` is intentionally thin and only defines the route tree. It renders a shared `Layout` route at `/`, with nested routes for:
   - `index` -> `HomePage`
   - `/privacy` -> `PrivacyPolicyPage`
-  - `/estimator` -> `EstimatorPage`
-  - `/estimator/results` -> `EstimatorResultsPage`
 - `src/components/Layout.tsx` owns the persistent shell: brand, top navigation, main content area, and footer. Nested pages render through `<Outlet />`.
 - `src/pages/HomePage.tsx` contains the homepage content: hero, stats counter, how-it-works, and services sections.
-- `src/components/CallRequestModal.tsx` owns the "Request a Call" form. On submit it POSTs directly to the n8n webhook URL (`VITE_N8N_WEBHOOK_URL`). No backend involved.
+- `src/components/CallRequestForm.tsx` and `src/components/IntakeForm.tsx` own the lead forms; `Modal.tsx` wraps them in a native `<dialog>`.
 - `src/pages/PrivacyPolicyPage.tsx` is a static content page broken into titled sections.
 
-## n8n Integration
+## Lead capture (being rebuilt)
 
-**The browser posts directly to n8n. There is no intermediate backend.**
+**The lead pipeline is being rebuilt. Leads are not delivered anywhere yet.**
 
-- The webhook URL is stored in the `VITE_N8N_WEBHOOK_URL` environment variable (inlined at build time by Vite).
-- Copy `.env.example` to `.env.local` and set `VITE_N8N_WEBHOOK_URL` for local development.
-- In Netlify, set `VITE_N8N_WEBHOOK_URL` as a build environment variable.
-
-### Canonical webhook payload (website form → n8n)
-
-```json
-{
-  "businessName": "Acme Roofing",
-  "contactName": "John Smith",
-  "phone": "(606) 555-1234",
-  "email": "john@acmeroofing.com",
-  "website": "acmeroofing.com",
-  "industry": "Roofing",
-  "message": "We need help with missed-call text back and appointment reminders.",
-  "source": "Website Form"
-}
-```
-
-- The Tally.so form uses the same field labels and posts to the same webhook URL, but n8n normalizes the Tally payload in a Code node. See `TALLY_SETUP.md` for the exact field spec and n8n mapping code.
+- Both forms (`src/components/CallRequestForm.tsx`, `src/components/IntakeForm.tsx`) POST to `/.netlify/functions/intake`.
+- `netlify/functions/intake.mjs` is a placeholder: it stores and forwards nothing and answers `503 { delivered: false }`. The forms show "Online requests aren't connected yet" with the contact email instead of a success screen.
+- The old direct-to-n8n webhook flow and its environment variable were removed. No environment variables are needed right now.
 
 ## Styling
 
@@ -88,11 +69,11 @@ npm run preview
 - TypeScript is configured with `strict: true`. Avoid `any`; use proper interfaces or type aliases. `noEmit: true` means the TypeScript compiler only type-checks — Vite handles transpilation.
 - Key library versions: **React 19**, **React Router v7**. Use current API patterns (nested `<Routes>`/`<Route>` with `<Outlet />`).
 - If you add a new page, wire it in both `src/App.tsx` and `src/components/Layout.tsx`.
-- The Tawk.to live chat widget is embedded via a script tag in `index.html`. Do not move it to a React component.
-- **Do not commit `VITE_N8N_WEBHOOK_URL`** to the repo. Use `.env.local` locally; use Netlify build environment variables in production.
+- Tawk.to live chat is disabled for now. `src/components/TawkWidget.tsx` is a placeholder; the original integration is kept in `src/components/disabled/` for restoring after it is tested in a real browser.
+- Never commit `.env` files or secrets. `.gitignore` covers `.env` and `.env.*` (except `.env.example`).
 
 ## Deployment
 
 - Frontend is a static Vite build (`dist/`) deployed to **Netlify**.
 - Build command: `npm run build` | Publish directory: `dist`
-- Required Netlify environment variable: `VITE_N8N_WEBHOOK_URL`
+- No Netlify environment variables are required at the moment.

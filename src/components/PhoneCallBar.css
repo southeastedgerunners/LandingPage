@@ -1,0 +1,38 @@
+/* Thumb-reach call action for phones. Hidden (and out of the tab order) until PhoneCallBar shows it. */
+.phone-call-bar {
+  position: fixed;
+  inset-inline: 0;
+  bottom: 0;
+  z-index: 20;
+  padding: 0.75rem 1rem max(0.75rem, env(safe-area-inset-bottom));
+  background: var(--color-elevated);
+  border-top: 1px solid var(--color-border);
+  transform: translateY(100%);
+  visibility: hidden;
+  transition:
+    transform var(--duration-base) var(--ease-out),
+    visibility 0s linear var(--duration-base);
+}
+
+.phone-call-bar[data-visible='true'] {
+  transform: none;
+  visibility: visible;
+  transition: transform var(--duration-base) var(--ease-out);
+}
+
+.phone-call-bar .cta-button {
+  width: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .phone-call-bar,
+  .phone-call-bar[data-visible='true'] {
+    transition: none;
+  }
+}
+
+@media (min-width: 561px) {
+  .phone-call-bar {
+    display: none;
+  }
+}

@@ -25,3 +25,51 @@
 - **Decisions:** The intake placeholder answers 503 rather than 200, so the site never shows a success screen for a lead that went nowhere; the forms show an "online requests aren't connected yet, please email" message. The Tawk original stays under test in disabled/ so it remains restorable. Example addresses (john@acmeroofing.com, name@example.com, test data) were left as they are.
 - **Files:** netlify/functions/intake.mjs (+ test), src/lib/submitLead.ts, FormMessages/CallRequestForm/IntakeForm, TawkWidget (+ disabled/), Placeholder component, HomePage, Privacy and Terms pages, .env.example, vite-env.d.ts, .github/*, TALLY_SETUP.md, SMS_CONSENT_COMPLIANCE.md, PLACEHOLDERS.md, .gitignore.
 - **Open:** Fill the placeholders (PLACEHOLDERS.md). Rebuild the lead pipeline. Test Tawk in a real browser. Decide on CI Node version and its swallowed test failures. Nothing is pushed.
+
+### 2026-11-27 12:36 EST · Mobile responsiveness check
+- **Did:** Checked all six routes (/, /contact, /quick-contact, /privacy, /terms, 404) in headless Chromium (GPU off) at 320, 375, 414 and 768px wide. Measured horizontal overflow, tap-target heights and the smallest text size. Took screenshots of the homepage and /contact at 375px. Read through the CSS media queries.
+- **Found:** No horizontal overflow on any page at any width. Smallest text is 12.9px at 320px wide and 13.8px from 375px up. No console errors or warnings. The only small tap targets are inline text links (the email address, Privacy Policy) and the 18px SMS-consent checkbox, whose full label is clickable. The hero's missed-call card looks empty in an early screenshot only because its staged animation is still playing; it fills in after a few seconds. **The CSS is desktop-first:** every layout breakpoint is a `max-width` override (Layout.css 720/360, HomePage.css 900/560, forms.css, Modal.css, ContactPage.css 560). That works on phones but isn't the mobile-first approach the owner wants.
+- **Decisions:** Changed no code. Converting to mobile-first touches five CSS files, so it waits for the owner's go-ahead. The placeholders stay as they are, per the owner.
+- **Files:** docs/worklog.md only. Screenshots are in the session scratchpad, not the repo.
+- **Open:** Approve a mobile-first CSS conversion (min-width breakpoints, same visual result)?
+
+### 2026-11-27 13:32 EST · Mobile-first conversion and design review fixes
+- **Did:** Converted every stylesheet to mobile-first: phone styles are the default, and `min-width` queries at 361, 561, 721 and 901px add wider layouts. Proved the conversion changed nothing visible with a screenshot harness: 210 screenshots (21 widths × 10 page states) were pixel-identical before and after each step. Added a test that fails on any `max-width` media query. Ran an Impeccable critique with two independent reviewers (design review; detector + headless browser). Fixed what the owner chose (all issues):
+  - tablet layouts from 721px
+  - a worked example that sizes itself to its own width
+  - aligned service columns
+  - an email address that breaks at the @
+  - the intake form as a full-screen sheet on phones
+  - a phone-only "Request a Call" bar at the bottom of the screen
+  - the example log playing when scrolled into view
+  - a shorter hero paragraph
+  - a call action on the 404 page
+  - 44px footer links, wrapped placeholders, a square success check, phone heading sizes, and the legal line length
+
+  Updated DESIGN.md.
+- **Found:** Critique scored 25/32 (trend 17 → 24 → 25). Its main points:
+  - The phone first screen showed the generic part of the page.
+  - The phone call action vanished for about 3,300px of scrolling.
+  - The tablet band left 30–75% of the width empty.
+  - The email broke mid-word at 320, 901 and 1024px.
+  - The intake dialog's close button scrolled out of view on phones.
+
+  The production CSS minifier rewrites every width query into range syntax (`width>=561px`), which Safari before 16.4 ignores. That was already true for the old `max-width` rules, so it isn't new here (see Open). Vitest stubs CSS imports as empty strings, so the guard test reads stylesheets from disk. `IntersectionObserver` reports `isIntersecting` for any overlap, so its 0.5 threshold alone did not hold the example back on phones; the hook now checks `intersectionRatio` (caught in the real browser, now covered by a test). Final sweep: 48 route/width checks with no overflow, no standalone tap target under 24px, no contrast failures and no console errors. The detector's only finding is a false positive: 16px form inputs, which stop iOS zooming in.
+- **Decisions:**
+  - Wrote breakpoints as `min-width: N+1px` rather than range syntax, because it's the more familiar form.
+  - Kept everything inside the locked palette.
+  - The call bar uses `data-contact-region` markers, so each page says where its own contact actions are, instead of the bar knowing about pages.
+  - Skipped: form-label casing ("Your Name" vs sentence case), because it's copy plus test churn for little gain; the Privacy link inside the SMS consent label, because it's compliance markup; and making the hero bigger on very wide screens.
+  - Placeholders untouched, as asked.
+  - The two critique reviewers shared one headless browser, so only the detector reviewer drove it.
+- **Files:**
+  - New: `src/components/{EmailLink,PhoneCallBar}.tsx` (+ tests), `PhoneCallBar.css`, `src/pages/HomePage.test.tsx`, `src/mobileFirst.test.mjs`, `src/test/fakeIntersectionObserver.ts`, `.impeccable/critique/2026-11-27T18-14-35Z__src-pages-homepage-tsx.md`.
+  - Changed: every stylesheet under `src/`, `HomePage.tsx`, `Layout.tsx`, `NotFoundPage.tsx`, `ContactPage.tsx`, `QuickContactPage.tsx`, `FormMessages.tsx`, the Privacy and Terms pages, `content/homePage.ts`, `App.test.tsx`, `DESIGN.md`.
+  - The parity harness and helper scripts live in the gitignored `.playwright-mcp/` folder.
+- **Open:**
+  - The owner should review the new hero sentence.
+  - Nothing is pushed; whether to push and open a PR is the owner's call.
+  - Decide whether Vite's CSS target should cover Safari before 16.4.
+  - PRODUCT.md still says Tawk chat loads on every page and mentions the removed stats.
+  - `.impeccable/design.json` is older than DESIGN.md; `/impeccable document` would refresh it.
+  - The remaining placeholders (photo, intro, phone, pricing, first call) are still the trust gap the critique flagged.

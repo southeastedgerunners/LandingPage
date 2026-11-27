@@ -24,6 +24,7 @@
 
 .lead-form__row {
   display: flex;
+  flex-direction: column;
   gap: 0.75rem;
 }
 
@@ -231,8 +232,8 @@
   max-width: 300px;
 }
 
-@media (max-width: 560px) {
+@media (min-width: 561px) {
   .lead-form__row {
-    flex-direction: column;
+    flex-direction: row;
   }
 }

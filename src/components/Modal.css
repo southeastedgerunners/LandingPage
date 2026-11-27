@@ -48,7 +48,7 @@
 
 .modal__body {
   position: relative;
-  padding: 2rem;
+  padding: 1.5rem 1rem;
 }
 
 .modal__close {
@@ -79,8 +79,8 @@
   padding-right: 2.75rem;
 }
 
-@media (max-width: 560px) {
+@media (min-width: 561px) {
   .modal__body {
-    padding: 1.5rem 1rem;
+    padding: 2rem;
   }
 }

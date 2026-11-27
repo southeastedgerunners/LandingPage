@@ -6,7 +6,7 @@
 export const heroTitle = 'Let the busywork run itself.';
 
 export const heroLead =
-  'We build websites and the automations behind them for small businesses in Southeastern Kentucky: missed-call text-backs, follow-ups, invoice reminders and review requests, set up once and running every day.';
+  'We build websites and the automations behind them for small businesses in Southeastern Kentucky, set up once and running every day.';
 
 // ── Worked example (illustrative, labelled as such on the page) ───────────────
 
